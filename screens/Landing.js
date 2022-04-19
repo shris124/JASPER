@@ -30,29 +30,12 @@ const Landing = (props) => {
 			</Block>
 			<Block flex space="between" style={styles.padded}>
 				<Block flex space="around" style={{ zIndex: 2 }}>
-					<Block style={styles.title}>
-						<Block>
-							<Text color="white" size={60}>
-								Design
-							</Text>
-						</Block>
-						<Block>
-							<Text color="white" size={60}>
-								System
-							</Text>
-						</Block>
-						<Block style={styles.subTitle}>
-							<Text color="white" size={16}>
-								Fully coded React Native components.
-							</Text>
-						</Block>
-					</Block>
 					<Block center>
 						<Button
 							style={styles.button}
-							color={argonTheme.COLORS.SECONDARY}
+							color={argonTheme.COLORS.PRIMARY}
 							onPress={() => navigation.navigate("App")}
-							textStyle={{ color: argonTheme.COLORS.BLACK }}
+							textStyle={{ color: argonTheme.COLORS.WHITE}}
 						>
 							Get Started
 						</Button>
@@ -78,10 +61,11 @@ const styles = StyleSheet.create({
 		height: theme.SIZES.BASE * 3,
 		shadowRadius: 0,
 		shadowOpacity: 0,
+		borderRadius: 99,
 	},
 	logo: {
-		width: 200,
-		height: 60,
+		width: 345,
+		height: 120,
 		zIndex: 2,
 		position: "relative",
 		marginTop: "-50%",
