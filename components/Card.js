@@ -15,7 +15,7 @@ class Card extends React.Component {
       full ? styles.fullImage : styles.horizontalImage,
       imageStyle
     ];
-    const cardContainer = [styles.card, styles.shadow, style];
+    const cardContainer = [styles.card, style];
     const imgContainer = [styles.imageContainer,
       horizontal ? styles.horizontalStyles : styles.verticalStyles,
       styles.shadow
@@ -29,9 +29,9 @@ class Card extends React.Component {
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
-          <Block flex space="between" style={styles.cardDescription}>
+          <Block flex style={styles.cardDescription}>
             <Text size={14} style={styles.cardTitle}>{item.title}</Text>
-            <Text size={12} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.ACTIVE} bold>{item.cta}</Text>
+            <Text size={14} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.SECONDARY} bold>{item.cta}</Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     marginVertical: theme.SIZES.BASE,
     borderWidth: 0,
     minHeight: 114,
-    marginBottom: 16
+    marginBottom: 16,
   },
   cardTitle: {
     flex: 1,
@@ -61,18 +61,20 @@ const styles = StyleSheet.create({
     paddingBottom: 6
   },
   cardDescription: {
-    padding: theme.SIZES.BASE / 2
+    padding: theme.SIZES.BASE / 2,
+
   },
   imageContainer: {
     borderRadius: 3,
     elevation: 1,
     overflow: 'hidden',
+    
   },
   image: {
     // borderRadius: 3,
   },
   horizontalImage: {
-    height: 122,
+    height: 134,
     width: 'auto',
   },
   horizontalStyles: {
@@ -80,8 +82,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 0,
   },
   verticalStyles: {
-    borderBottomRightRadius: 0,
-    borderBottomLeftRadius: 0
+    borderRadius: 30
   },
   fullImage: {
     height: 215

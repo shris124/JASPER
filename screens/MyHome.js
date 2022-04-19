@@ -14,16 +14,41 @@ const Home = () => {
 				contentContainerStyle={styles.articles}
 			>
 				<Block flex>
-					<Card item={articles[0]} horizontal />
 					<Block flex row>
 						<Card
-							item={articles[1]}
+							item={articles[0]}
 							style={{ marginRight: theme.SIZES.BASE }}
 						/>
-						<Card item={articles[2]} />
+						<Card item={articles[1]} />
 					</Block>
-					<Card item={articles[3]} horizontal />
-					<Card item={articles[4]} full />
+					<Block flex row>
+						<Card
+							item={articles[2]}
+							style={{ marginRight: theme.SIZES.BASE }}
+						/>
+						<Card item={articles[3]} />
+					</Block>
+					<Block flex row>
+						<Card
+							item={articles[4]}
+							style={{ marginRight: theme.SIZES.BASE }}
+						/>
+						<Card item={articles[5]} />
+					</Block>
+					<Block flex row>
+						<Card
+							item={articles[6]}
+							style={{ marginRight: theme.SIZES.BASE }}
+						/>
+						<Card item={articles[7]} />
+					</Block>
+					<Block flex row>
+						<Card
+							item={articles[8]}
+							style={{ marginRight: theme.SIZES.BASE }}
+						/>
+						<Card item={articles[9]} />
+					</Block>
 				</Block>
 			</ScrollView>
 		</Block>
@@ -33,6 +58,7 @@ const Home = () => {
 const styles = StyleSheet.create({
 	home: {
 		width: width,
+		backgroundColor: theme.COLORS.WHITE
 	},
 	articles: {
 		width: width - theme.SIZES.BASE * 2,
