@@ -71,9 +71,9 @@ export default props => {
     return (
       <NavigationContainer>
         <GalioProvider theme={argonTheme}>
-          <Block flex>
+          <SafeAreaView flex>
             <MyScreens />
-          </Block>
+          </SafeAreaView>
         </GalioProvider>
       </NavigationContainer>
     );

@@ -245,9 +245,10 @@ export default function LandingStack(props) {
 function AppStack(props) {
 	return (
 		<Tab.Navigator
-			tabBarOptions={{
-				showLabel: false,
+			screenOptions={{
+        tabBarShowLabel: false,
 				style: styles.bottomNav,
+        headerShown: false
 			}}
 			initialRouteName="HomeTab"
 		>
