@@ -71,7 +71,7 @@ export default class Tabs extends React.Component {
     
     const containerStyles = [
       styles.titleContainer,
-      !isActive && { backgroundColor: argonTheme.COLORS.SECONDARY },
+      !isActive && { backgroundColor: argonTheme.COLORS.MUTED },
       isActive && styles.containerShadow
     ];
 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     alignItems: 'center',
-    backgroundColor: argonTheme.COLORS.ACTIVE,
+    backgroundColor: argonTheme.COLORS.SECONDARY,
     borderRadius: 4,
     marginRight: 9
   },

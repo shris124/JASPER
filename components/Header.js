@@ -48,7 +48,7 @@ const SearchButton = ({isWhite, style, navigation}) => (
 class Header extends React.Component {
   handleLeftPress = () => {
     const { back, navigation } = this.props;
-    return (back ? navigation.goBack() : navigation.openDrawer());
+    return (back ? navigation.goBack() : null);
   }
   renderRight = () => {
     const { white, title, navigation } = this.props;
@@ -62,10 +62,11 @@ class Header extends React.Component {
 
     switch (title) {
       case 'Home':
-        return ([
-          <BellButton key='chat-home' navigation={navigation} isWhite={white} />,
-          <BasketButton key='basket-home' navigation={navigation} isWhite={white} />
-        ]);
+        // return ([
+        //   <BellButton key='chat-home' navigation={navigation} isWhite={white} />,
+        //   <BasketButton key='basket-home' navigation={navigation} isWhite={white} />
+        // ]);
+        return;
       case 'Deals':
         return ([
           <BellButton key='chat-categories' navigation={navigation} />,
@@ -101,6 +102,8 @@ class Header extends React.Component {
           <BellButton key='chat-search' navigation={navigation} isWhite={white} />,
           <BasketButton key='basket-search' navigation={navigation} isWhite={white} />
         ]);
+      case 'None':
+        return;
       default:
         break;
     }
@@ -180,7 +183,7 @@ class Header extends React.Component {
 
     return (
       <Block style={headerStyles}>
-        <NavBar
+        {/* <NavBar
           back={false}
           title={title}
           style={navbarStyles}
@@ -189,7 +192,7 @@ class Header extends React.Component {
           rightStyle={{ alignItems: 'center' }}
           left={
             <Icon 
-              name={back ? 'chevron-left' : "menu"} family="entypo" 
+              name={back ? 'chevron-left' : null} family="entypo" 
               size={20} onPress={this.handleLeftPress} 
               color={iconColor || (white ? argonTheme.COLORS.WHITE : argonTheme.COLORS.ICON)}
               style={{ marginTop: 2 }}
@@ -203,7 +206,7 @@ class Header extends React.Component {
             titleColor && { color: titleColor }
           ]}
           {...props}
-        />
+        /> */}
         {this.renderHeader()}
       </Block>
     );

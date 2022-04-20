@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Image } from "react-native";
+import { Image, StatusBar } from "react-native";
 import AppLoading from "expo-app-loading";
 import { useFonts } from '@use-expo/font';
 import { Asset } from "expo-asset";
@@ -13,6 +13,7 @@ enableScreens();
 import Screens from "./navigation/Screens";
 import MyScreens from "./navigation/MyScreens";
 import { Images, articles, argonTheme } from "./constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // cache app images
 const assetImages = [

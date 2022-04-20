@@ -1,10 +1,10 @@
-import { Animated, Dimensions, Easing } from "react-native";
+import { Dimensions, StyleSheet, View, TouchableOpacity, Image } from "react-native";
 // header for screens
 import { Header, Icon } from "../components";
 import { argonTheme, tabs } from "../constants";
 
 import Articles from "../screens/Articles";
-import { Block } from "galio-framework";
+import { Block, Text } from "galio-framework";
 // drawer
 import CustomDrawerContent from "./Menu";
 import Elements from "../screens/Elements";
@@ -26,232 +26,338 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
+const CustomTabBarButton = ({ children, onPress }) => (
+	<TouchableOpacity
+		style={[styles.customButton, styles.shadow]}
+		onPress={onPress}
+	>
+		<View
+			style={{
+				width: 70,
+				height: 70,
+				borderRadius: 35,
+				backgroundColor: argonTheme.COLORS.PRIMARY,
+			}}
+		>
+			{children}
+		</View>
+	</TouchableOpacity>
+);
+
 function ElementsStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Elements"
-        component={Elements}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Elements" navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen
+				name="Elements"
+				component={Elements}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Elements"
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 function ArticlesStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Articles"
-        component={Articles}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Articles" navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="Articles"
+				component={Articles}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Articles"
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 function ProfileStack(props) {
-  return (
-    <Stack.Navigator
-      initialRouteName="Profile"
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              transparent
-              white
-              title="Profile"
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#FFFFFF" },
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			initialRouteName="Profile"
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="Profile"
+				component={Profile}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							transparent
+							white
+							title="Profile"
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#FFFFFF" },
+					headerTransparent: true,
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 function HomeStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Home"
-              search
-              options
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="Home"
+				component={Home}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Home"
+							tabs={tabs.categories}
+							search
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 export default function LandingStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Landing"
-        component={Landing}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen name="App" component={AppStack} />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen
+				name="Landing"
+				component={Landing}
+				option={{
+					headerTransparent: true,
+				}}
+			/>
+			<Stack.Screen name="App" component={AppStack} />
+		</Stack.Navigator>
+	);
 }
 
 function AppStack(props) {
-  return (
-    <Drawer.Navigator
-      style={{ flex: 1 }}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-      drawerStyle={{
-        backgroundColor: "white",
-        width: width * 0.8,
-      }}
-      drawerContentOptions={{
-        activeTintcolor: "white",
-        inactiveTintColor: "#000",
-        activeBackgroundColor: "transparent",
-        itemStyle: {
-          width: width * 0.75,
-          backgroundColor: "transparent",
-          paddingVertical: 16,
-          paddingHorizonal: 12,
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          overflow: "hidden",
-        },
-        labelStyle: {
-          fontSize: 18,
-          marginLeft: 12,
-          fontWeight: "normal",
-        },
-      }}
-      initialRouteName="Home"
-    >
-      <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="Profile" component={ProfileStack} />
-      <Drawer.Screen name="Account" component={Register} />
-      <Drawer.Screen name="Elements" component={ElementsStack} />
-      <Drawer.Screen name="Articles" component={ArticlesStack} />
-    </Drawer.Navigator>
-  );
+	return (
+		<Tab.Navigator
+			tabBarOptions={{
+				showLabel: false,
+				style: styles.bottomNav,
+			}}
+			initialRouteName="HomeTab"
+		>
+			<Tab.Screen
+				name="HomeTab"
+				component={HomeStack}
+				options={{
+					tabBarIcon: ({ focused }) => (
+						<View>
+							<Icon
+								name="home"
+								family="MaterialIcons"
+								size={30}
+							/>
+						</View>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="ProfileTab"
+				component={ProfileStack}
+				options={{
+					tabBarIcon: ({ focused }) => (
+						<View>
+							<Icon name="heart" family="Entypo" size={30} />
+						</View>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="AccountTab"
+				component={Register}
+				options={{
+					tabBarIcon: ({ focused }) => (
+						<View>
+							<Icon
+								name="plus"
+								family="Entypo"
+								size={40}
+                color={argonTheme.COLORS.WHITE}
+							/>
+							{/* <Image
+								source={require("../assets/imgs/ios.png")}
+                resizeMode='contain'
+                style={{
+                  width: 30,
+                  height: 30,
+                  tintColor: argonTheme.COLORS.BLACK
+                }}
+              /> */}
+						</View>
+					),
+					tabBarButton: (props) => <CustomTabBarButton {...props} />,
+				}}
+			/>
+			<Tab.Screen
+				name="ElementsTab"
+				component={ElementsStack}
+				options={{
+					tabBarIcon: ({ focused }) => (
+						<View>
+							<Icon
+								name="chat-bubble"
+								family="MaterialIcons"
+								size={30}
+							/>
+						</View>
+					),
+				}}
+			/>
+			<Tab.Screen
+				name="ArticlesTab"
+				component={ArticlesStack}
+				options={{
+					tabBarIcon: ({ focused }) => (
+						<View>
+							<Icon
+								name="person"
+								family="MaterialIcons"
+								size={30}
+							/>
+						</View>
+					),
+				}}
+			/>
+		</Tab.Navigator>
+	);
 }
+
+const styles = StyleSheet.create({
+	shadow: {
+		shadowColor: argonTheme.COLORS.BLACK,
+		shadowOffset: { width: 0, height: 2 },
+		shadowRadius: 4,
+		shadowOpacity: 0.1,
+		elevation: 5,
+	},
+	bottomNav: {
+		position: "absolute",
+		bottom: 25,
+		left: 20,
+		right: 20,
+		elevation: 0,
+		backgroundColor: argonTheme.COLORS.WHITE,
+		borderRadius: 15,
+		height: 90,
+	},
+	customButton: {
+		top: -30,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+});
