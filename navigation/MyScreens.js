@@ -4,13 +4,14 @@ import { Header, Icon } from "../components";
 import { argonTheme, tabs } from "../constants";
 
 import Articles from "../screens/Articles";
+import Saved from "../screens/Saved";
 import { Block, Text } from "galio-framework";
 // drawer
 import CustomDrawerContent from "./Menu";
 import Elements from "../screens/Elements";
 // screens
 import Home from "../screens/MyHome";
-import Onboarding from "../screens/Onboarding";
+import Detail from "../screens/Detail";
 import Landing from "../screens/Landing";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
@@ -87,7 +88,7 @@ function ElementsStack(props) {
 	);
 }
 
-function ArticlesStack(props) {
+function SavedStack(props) {
 	return (
 		<Stack.Navigator
 			screenOptions={{
@@ -96,12 +97,12 @@ function ArticlesStack(props) {
 			}}
 		>
 			<Stack.Screen
-				name="Articles"
-				component={Articles}
+				name="Saved"
+				component={Saved}
 				options={{
 					header: ({ navigation, scene }) => (
 						<Header
-							title="Articles"
+							title="Saved"
 							navigation={navigation}
 							scene={scene}
 						/>
@@ -202,20 +203,18 @@ function HomeStack(props) {
 				}}
 			/>
 			<Stack.Screen
-				name="Pro"
-				component={Pro}
+				name="Detail"
+				component={Detail}
 				options={{
 					header: ({ navigation, scene }) => (
 						<Header
-							title=""
+							title="Home"
 							back
 							white
-							transparent
 							navigation={navigation}
 							scene={scene}
 						/>
-					),
-					headerTransparent: true,
+					)
 				}}
 			/>
 		</Stack.Navigator>
@@ -268,8 +267,8 @@ function AppStack(props) {
 				}}
 			/>
 			<Tab.Screen
-				name="ProfileTab"
-				component={ProfileStack}
+				name="SavedTab"
+				component={SavedStack}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<View>
@@ -320,8 +319,8 @@ function AppStack(props) {
 				}}
 			/>
 			<Tab.Screen
-				name="ArticlesTab"
-				component={ArticlesStack}
+				name="ProfileTab"
+				component={ProfileStack}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<View>

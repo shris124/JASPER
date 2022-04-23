@@ -9,7 +9,7 @@ import { argonTheme } from '../constants';
 
 class Card extends React.Component {
   render() {
-    const { navigation, item, horizontal, full, style, ctaColor, imageStyle } = this.props;
+    const { navigation, item, horizontal, full, style, priceColor, imageStyle } = this.props;
     
     const imageStyles = [
       full ? styles.fullImage : styles.horizontalImage,
@@ -23,15 +23,15 @@ class Card extends React.Component {
 
     return (
       <Block row={horizontal} card flex style={cardContainer}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Detail')}>
           <Block flex style={imgContainer}>
             <Image source={{uri: item.image}} style={imageStyles} />
           </Block>
         </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Pro')}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('Detail')}>
           <Block flex style={styles.cardDescription}>
             <Text size={14} style={styles.cardTitle}>{item.title}</Text>
-            <Text size={14} muted={!ctaColor} color={ctaColor || argonTheme.COLORS.SECONDARY} bold>{item.cta}</Text>
+            <Text size={14} muted={!priceColor} color={priceColor || argonTheme.COLORS.SECONDARY} bold>{item.price}</Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>
@@ -43,7 +43,7 @@ Card.propTypes = {
   item: PropTypes.object,
   horizontal: PropTypes.bool,
   full: PropTypes.bool,
-  ctaColor: PropTypes.string,
+  priceColor: PropTypes.string,
   imageStyle: PropTypes.any,
 }
 
