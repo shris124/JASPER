@@ -1,19 +1,26 @@
 export default [
 	{
 		title: "Black IKEA chair",
+		sellerId: "a12345",
+		condition: "Brand New",
 		description: "Black IKEA chair in good condition, used for a year.",
-		image: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80",
+		images: [
+			"https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80",
+			"https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
+		],
 		price: "$ 25",
 	},
 	{
 		title: "iMac with Keyboard and Mouse",
-		description: "One and a half year old iMac, comes with Apple keyboard and Apple mouse",
+		description:
+			"One and a half year old iMac, comes with Apple keyboard and Apple mouse",
 		image: "https://images.unsplash.com/photo-1588200908342-23b585c03e26?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
 		price: "$ 700",
 	},
 	{
 		title: "LANCOME Lipstick",
-		description: "Brand new, I accidently bought the wrong color and never used it.",
+		description:
+			"Brand new, I accidently bought the wrong color and never used it.",
 		image: "https://images.unsplash.com/photo-1619352520578-8fefbfa2f904?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80",
 		price: "$ 20",
 	},
