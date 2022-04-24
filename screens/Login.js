@@ -2,6 +2,9 @@ import React from "react";
 import { SafeAreaView, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Theme } from '../components';
+import { auth, signInWithEmailAndPassword, signInWithGoogle } from "../firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 import {
   StyleSheet,
   Text,
