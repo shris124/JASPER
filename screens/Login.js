@@ -14,7 +14,7 @@ const Login = ({ navigation }) => {
     <View style={styles.container}>
       <TextInput placeholder="Enter your UW ID" placeholderTextColor='#6314AB'></TextInput>
       <TextInput placeholder="Password" placeholderTextColor='#6314AB' secureTextEntry={true}></TextInput>
-      <Button title='Sign in' onPress={() => Alert.alert('Signing in')}></Button>
+      <Button title='Sign in' onPress={() => navigation.navigate("App")}></Button>
     </View>
   );
 };
