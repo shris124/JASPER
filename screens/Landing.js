@@ -34,7 +34,7 @@ const Landing = (props) => {
 						<Button
 							style={styles.button}
 							color={argonTheme.COLORS.PRIMARY}
-							onPress={() => navigation.navigate("App")}
+							onPress={() => navigation.navigate("Login")}
 							textStyle={{ color: argonTheme.COLORS.WHITE}}
 						>
 							Get Started

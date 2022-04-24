@@ -4,9 +4,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Theme } from '../components';
 import {
   StyleSheet,
-  Text,
   View,
-  TextInput,
   Button,
   Alert
 } from "react-native";
