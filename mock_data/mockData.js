@@ -1,6 +1,6 @@
 import useWindowDimensions from "react-native/Libraries/Utilities/useWindowDimensions";
 
-const users = {
+export const users = {
 
     "12345" :{
         userId: "12345",
@@ -22,7 +22,7 @@ const users = {
     }
 }
 
-const conversation = {
+export const conversation = {
   "101010" : {
       conversationId: "101010",
       participants: ["12345", "98765"],
@@ -42,7 +42,7 @@ const conversation = {
   }
 }
 
-const items = {
+export const items = {
     objectId: "1357",
     name: "Monarch Nightstand",
     price: "130",
