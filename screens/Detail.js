@@ -11,8 +11,9 @@ import {
 } from "react-native";
 //argon
 import { Images, argonTheme, articles } from "../constants/";
+import { items } from "../mock_data/mockData";
 
-import { Card } from "../components/";
+import { Button, Card, Icon } from "../components/";
 import { users } from "../mock_data/mockData";
 
 // Libraries
@@ -21,25 +22,9 @@ import StarRating from "react-native-star-rating";
 const { width } = Dimensions.get("screen");
 const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
-const categories = [
-	{
-		title: "Music Album",
-		description:
-			"Rock music is a genre of popular music. It developed during and after the 1960s in the United Kingdom.",
-		image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?fit=crop&w=840&q=80",
-		price: "$125",
-	},
-	{
-		title: "Events",
-		description:
-			"Rock music is a genre of popular music. It developed during and after the 1960s in the United Kingdom.",
-		image: "https://images.unsplash.com/photo-1543747579-795b9c2c3ada?fit=crop&w=840&q=80",
-		price: "$35",
-	},
-];
 
 class Detail extends React.Component {
-	renderProduct = (imgUri) => {
+	renderImage = (imgUri) => {
 		const { navigation } = this.props;
 
 		return (
@@ -59,128 +44,224 @@ class Detail extends React.Component {
 		);
 	};
 
-	renderCards = () => {
-		const item = articles[0];
+	renderImageCarousel = (item) => {
 		return (
-			<Block flex style={styles.group}>
-				<Text bold size={16} style={styles.title}>
-					{articles[0].title}
-				</Text>
-				<Block flex>
-					<Block flex style={{ marginTop: theme.SIZES.BASE / 2 }}>
-						<Block
-							flex
-							row
-							style={{ paddingHorizontal: theme.SIZES.BASE }}
-						>
-							<Block>
-								<Text
-									size={16}
-									color={argonTheme.COLORS.PRIMARY}
-									style={styles.productPrice}
-								>
-									{item.condition}
-								</Text>
-								<Text center size={34}>
-									{item.title}
-								</Text>
-							</Block>
-							<Block flex row>
-								<Image
-									source={{ uri: Images.ProfilePicture }}
-									style={styles.avatar}
-								/>
-								<Text center size={14} style={styles.userName}>
-									Jessica 
-								</Text>
-								<StarRating rating={5} starSize={20}/>
-							</Block>
-						</Block>
-						<ScrollView
-							horizontal={true}
-							pagingEnabled={true}
-							decelerationRate={0}
-							scrollEventThrottle={16}
-							snapToAlignment="center"
-							showsHorizontalScrollIndicator={false}
-							snapToInterval={
-								cardWidth + theme.SIZES.BASE * 0.375
-							}
-							contentContainerStyle={{
-								paddingHorizontal: theme.SIZES.BASE / 2,
-							}}
-						>
-							{articles &&
-								item.images.map((image) =>
-									this.renderProduct(image)
-								)}
-						</ScrollView>
-						<Block>
-							<Text
-								center
-								size={16}
-								color={theme.COLORS.MUTED}
-								style={styles.productDescription}
-							>
-								{item.description}
-							</Text>
-						</Block>
-					</Block>
-				</Block>
-			</Block>
+			<ScrollView
+				horizontal={true}
+				pagingEnabled={true}
+				decelerationRate={0}
+				scrollEventThrottle={16}
+				snapToAlignment="center"
+				showsHorizontalScrollIndicator={false}
+				snapToInterval={cardWidth + theme.SIZES.BASE * 0.375}
+				contentContainerStyle={{
+					paddingHorizontal: theme.SIZES.BASE / 2,
+				}}
+			>
+				{items && item.images.map((image) => this.renderImage(image))}
+			</ScrollView>
 		);
 	};
 
-	renderAlbum = () => {
-		const { navigation } = this.props;
-
-		return (
-			<Block
-				flex
-				style={[styles.group, { paddingBottom: theme.SIZES.BASE * 5 }]}
-			>
-				<Text bold size={16} style={styles.title}>
-					Album
-				</Text>
-				<Block style={{ marginHorizontal: theme.SIZES.BASE * 2 }}>
-					<Block flex right>
-						<Text
-							size={12}
-							color={theme.COLORS.PRIMARY}
-							onPress={() => navigation.navigate("Home")}
-						>
-							View All
-						</Text>
-					</Block>
-					<Block
-						row
-						space="between"
-						style={{
-							marginTop: theme.SIZES.BASE,
-							flexWrap: "wrap",
-						}}
-					>
-						{Images.Viewed.map((img, index) => (
-							<Block key={`viewed-${img}`} style={styles.shadow}>
-								<Image
-									resizeMode="cover"
-									source={{ uri: img }}
-									style={styles.albumThumb}
-								/>
-							</Block>
-						))}
-					</Block>
-				</Block>
-			</Block>
-		);
+	renderCard = (item) => {
+		return <Card item={item} style={styles.similarItems} />;
 	};
 
 	render() {
+		const item = items.i00001;
+		const similarItems = Object.keys(items).map((key) => items[key]);
 		return (
 			<Block flex center>
 				<ScrollView showsVerticalScrollIndicator={false}>
-					{this.renderCards()}
-					{/* {this.renderAlbum()} */}
+					<Block flex style={styles.group}>
+						<Block flex style={{ marginTop: theme.SIZES.BASE / 2 }}>
+							<Block
+								flex
+								row
+								style={{
+									paddingHorizontal: theme.SIZES.BASE,
+									paddingBottom: theme.SIZES.BASE,
+								}}
+							>
+								<Block width={(width / 7) * 4}>
+									<Text
+										size={16}
+										color={argonTheme.COLORS.PRIMARY}
+										style={styles.productPrice}
+									>
+										{item.condition}
+									</Text>
+									<Text
+										size={34}
+										style={{ paddingHorizontal: 1 }}
+									>
+										{item.title}
+									</Text>
+								</Block>
+								<Block>
+									<Block flex row style={{ top: 15 }}>
+										<Image
+											source={{
+												uri: Images.ProfilePicture,
+											}}
+											style={styles.avatar}
+										/>
+										<Block>
+											<Text
+												size={14}
+												style={styles.userName}
+											>
+												Jessica
+											</Text>
+											<StarRating
+												disabled
+												rating={4}
+												starSize={18}
+												starStyle={styles.stars}
+												fullStarColor={"#FDCC0D"}
+											/>
+										</Block>
+									</Block>
+									<Block>
+										<Text
+											size={24}
+											style={styles.productPrice}
+										>
+											{"$" + item.price.toFixed(2)}
+										</Text>
+									</Block>
+								</Block>
+							</Block>
+							{this.renderImageCarousel(item)}
+							<Block style={styles.descriptionBox}>
+								<Text
+									size={18}
+									color={theme.COLORS.BLACK}
+									style={styles.title}
+								>
+									Description:
+								</Text>
+								<Block>
+									<Text
+										size={16}
+										color={theme.COLORS.BLACK}
+										style={styles.productDescription}
+									>
+										{item.description}
+									</Text>
+								</Block>
+								<Block
+									flex
+									row
+									style={{
+										marginVertical: theme.SIZES.BASE,
+										left: theme.SIZES.BASE,
+									}}
+								>
+									<Icon
+										name="location-pin"
+										family="MaterialIcons"
+										size={25}
+										color={argonTheme.COLORS.HEADER}
+									></Icon>
+									<Text
+										size={18}
+										style={{
+											fontWeight: "bold",
+											color: argonTheme.COLORS.HEADER,
+										}}
+									>
+										{" Pick Up: "}
+									</Text>
+									<Text
+										size={18}
+										style={{
+											color: argonTheme.COLORS.HEADER,
+										}}
+									>
+										{item.pickUpLocation}
+									</Text>
+								</Block>
+								<Block
+									flex
+									row
+									style={{
+										left: theme.SIZES.BASE,
+									}}
+								>
+									<Icon
+										name="truck"
+										family="Feather"
+										size={25}
+										color={argonTheme.COLORS.HEADER}
+									></Icon>
+									<Text
+										size={18}
+										style={{
+											fontWeight: "bold",
+											color: argonTheme.COLORS.HEADER,
+										}}
+									>
+										{" Drop off: "}
+									</Text>
+									<Text
+										size={18}
+										style={{
+											color: argonTheme.COLORS.HEADER,
+										}}
+									>
+										{item.dropOff ? "Yes" : "No"}
+									</Text>
+								</Block>
+							</Block>
+							<Block
+								center
+								style={{
+									marginVertical: theme.SIZES.BASE,
+									bottom: theme.SIZES.BASE,
+								}}
+							>
+								<Button
+									style={styles.button}
+									textStyle={{ fontSize: 20 }}
+								>
+									{"Chat with " + item.sellerId}
+								</Button>
+							</Block>
+							<Block style={styles.descriptionBox}>
+								<Text
+									size={18}
+									color={theme.COLORS.BLACK}
+									style={styles.title}
+								>
+									Similar Items:
+								</Text>
+							</Block>
+							<ScrollView
+								horizontal={true}
+								pagingEnabled={true}
+								decelerationRate={0}
+								scrollEventThrottle={16}
+								snapToAlignment="center"
+								showsHorizontalScrollIndicator={false}
+								snapToInterval={
+									cardWidth + theme.SIZES.BASE * 0.375
+								}
+								contentContainerStyle={{
+									paddingHorizontal: theme.SIZES.BASE / 2,
+								}}
+								style={{
+									backgroundColor: theme.COLORS.WHITE,
+									marginBottom: theme.SIZES.BASE * 2,
+								}}
+							>
+								{similarItems &&
+									similarItems.map((similarItem) =>
+										this.renderCard(similarItem)
+									)}
+							</ScrollView>
+						</Block>
+					</Block>
 				</ScrollView>
 			</Block>
 		);
@@ -189,9 +270,8 @@ class Detail extends React.Component {
 
 const styles = StyleSheet.create({
 	title: {
-		paddingBottom: theme.SIZES.BASE,
-		paddingHorizontal: theme.SIZES.BASE * 2,
-		marginTop: 22,
+		fontWeight: "bold",
+		paddingTop: 20,
 		color: argonTheme.COLORS.HEADER,
 	},
 	group: {
@@ -209,6 +289,11 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		width: thumbMeasure,
 		height: thumbMeasure,
+	},
+	button: {
+		marginBottom: theme.SIZES.BASE,
+		width: width - theme.SIZES.BASE * 2,
+		height: theme.SIZES.BASE * 3,
 	},
 	category: {
 		backgroundColor: theme.COLORS.WHITE,
@@ -239,18 +324,44 @@ const styles = StyleSheet.create({
 		height: cardWidth - theme.SIZES.BASE,
 		borderRadius: 3,
 	},
-	productPrice: {
+	productTitle: {
 		paddingTop: theme.SIZES.BASE,
 		paddingBottom: theme.SIZES.BASE / 2,
 	},
-	productDescription: {
+	productPrice: {
 		paddingTop: theme.SIZES.BASE,
-		// paddingBottom: theme.SIZES.BASE * 2,
+		paddingBottom: theme.SIZES.BASE / 2,
+		color: argonTheme.COLORS.PRIMARY,
+		fontWeight: "bold",
+	},
+	productDescription: {
+		paddingVertical: theme.SIZES.BASE,
+		color: argonTheme.COLORS.HEADER,
+		left: 10,
+	},
+	descriptionBox: {
+		marginHorizontal: theme.SIZES.BASE,
+		marginBottom: theme.SIZES.BASE,
+		// borderRadius: 5,
+		// backgroundColor: theme.COLORS.WHITE,
+		// shadowColor: "black",
+		// shadowOffset: { width: 0, height: 2 },
+		// shadowRadius: 3,
+		// shadowOpacity: 0.2,
+		// elevation: 3,
 	},
 	userName: {
 		top: 20,
-		left: 5
-	}
+		left: 5,
+	},
+	stars: {
+		top: 20,
+		left: 3,
+	},
+	similarItems: {
+		width: 150,
+		marginRight: theme.SIZES.BASE,
+	},
 });
 
 export default Detail;

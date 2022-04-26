@@ -25,13 +25,13 @@ class Card extends React.Component {
       <Block row={horizontal} card flex style={cardContainer}>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Detail')}>
           <Block flex style={imgContainer}>
-            <Image source={{uri: item.image}} style={imageStyles} />
+            <Image source={{uri: item.images[0]}} style={imageStyles} />
           </Block>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback onPress={() => navigation.navigate('Detail')}>
           <Block flex style={styles.cardDescription}>
             <Text size={14} style={styles.cardTitle}>{item.title}</Text>
-            <Text size={14} muted={!priceColor} color={priceColor || argonTheme.COLORS.SECONDARY} bold>{item.price}</Text>
+            <Text size={14} muted={!priceColor} color={priceColor || argonTheme.COLORS.SECONDARY} bold>{"$" + item.price.toFixed(2)}</Text>
           </Block>
         </TouchableWithoutFeedback>
       </Block>

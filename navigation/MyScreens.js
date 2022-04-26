@@ -1,11 +1,17 @@
-import { Dimensions, StyleSheet, View, TouchableOpacity, Image } from "react-native";
+import {
+	Dimensions,
+	StyleSheet,
+	View,
+	TouchableOpacity,
+	Image,
+} from "react-native";
 // header for screens
 import { Header, Icon } from "../components";
 import { argonTheme, tabs } from "../constants";
 
 import Articles from "../screens/Articles";
 import Saved from "../screens/Saved";
-import { Block, Text } from "galio-framework";
+import { Block, Text, theme } from "galio-framework";
 // drawer
 import CustomDrawerContent from "./Menu";
 import Elements from "../screens/Elements";
@@ -208,13 +214,12 @@ function HomeStack(props) {
 				options={{
 					header: ({ navigation, scene }) => (
 						<Header
-							title="Home"
+							title="Detail"
 							back
-							white
 							navigation={navigation}
 							scene={scene}
 						/>
-					)
+					),
 				}}
 			/>
 		</Stack.Navigator>
@@ -245,9 +250,9 @@ function AppStack(props) {
 	return (
 		<Tab.Navigator
 			screenOptions={{
-        tabBarShowLabel: false,
+				tabBarShowLabel: false,
 				style: styles.bottomNav,
-        headerShown: false
+				headerShown: false,
 			}}
 			initialRouteName="HomeTab"
 		>
@@ -255,26 +260,60 @@ function AppStack(props) {
 				name="HomeTab"
 				component={HomeStack}
 				options={{
-					tabBarIcon: ({ focused }) => (
-						<View>
-							<Icon
-								name="home"
-								family="MaterialIcons"
-								size={30}
-							/>
-						</View>
-					),
+					tabBarIcon: ({ focused }) => {
+						if (focused) {
+							return (
+								<View>
+									<Icon
+										name="home"
+										family="MaterialIcons"
+										size={30}
+										color={argonTheme.COLORS.PRIMARY}
+									/>
+								</View>
+							);
+						} else {
+							return (
+								<View>
+									<Icon
+										name="home"
+										family="MaterialIcons"
+										size={30}
+									/>
+								</View>
+							);
+						}
+					},
 				}}
 			/>
 			<Tab.Screen
 				name="SavedTab"
 				component={SavedStack}
 				options={{
-					tabBarIcon: ({ focused }) => (
-						<View>
-							<Icon name="heart" family="Entypo" size={30} />
-						</View>
-					),
+					tabBarIcon: ({ focused }) => {
+						if (focused) {
+							return (
+								<View>
+									<Icon
+										name="heart"
+										family="AntDesign"
+										size={25}
+										color={argonTheme.COLORS.PRIMARY}
+									/>
+								</View>
+							);
+						} else {
+							return (
+								<View>
+									<Icon
+										name="heart"
+										family="AntDesign"
+										size={25}
+									/>
+								</View>
+							);
+						}
+					},
 				}}
 			/>
 			<Tab.Screen
@@ -287,17 +326,8 @@ function AppStack(props) {
 								name="plus"
 								family="Entypo"
 								size={40}
-                color={argonTheme.COLORS.WHITE}
+								color={argonTheme.COLORS.WHITE}
 							/>
-							{/* <Image
-								source={require("../assets/imgs/ios.png")}
-                resizeMode='contain'
-                style={{
-                  width: 30,
-                  height: 30,
-                  tintColor: argonTheme.COLORS.BLACK
-                }}
-              /> */}
 						</View>
 					),
 					tabBarButton: (props) => <CustomTabBarButton {...props} />,
@@ -307,30 +337,60 @@ function AppStack(props) {
 				name="ElementsTab"
 				component={ElementsStack}
 				options={{
-					tabBarIcon: ({ focused }) => (
-						<View>
-							<Icon
-								name="chat-bubble"
-								family="MaterialIcons"
-								size={30}
-							/>
-						</View>
-					),
+					tabBarIcon: ({ focused }) => {
+						if (focused) {
+							return (
+								<View>
+									<Icon
+										name="chat"
+										family="Entypo"
+										size={25}
+										color={argonTheme.COLORS.PRIMARY}
+									/>
+								</View>
+							);
+						} else {
+							return (
+								<View>
+									<Icon
+										name="chat"
+										family="Entypo"
+										size={25}
+									/>
+								</View>
+							);
+						}
+					},
 				}}
 			/>
 			<Tab.Screen
 				name="ProfileTab"
 				component={ProfileStack}
 				options={{
-					tabBarIcon: ({ focused }) => (
-						<View>
-							<Icon
-								name="person"
-								family="MaterialIcons"
-								size={30}
-							/>
-						</View>
-					),
+					tabBarIcon: ({ focused }) => {
+						if (focused) {
+							return (
+								<View>
+									<Icon
+										name="person"
+										family="MaterialIcons"
+										size={30}
+										color={argonTheme.COLORS.PRIMARY}
+									/>
+								</View>
+							);
+						} else {
+							return (
+								<View>
+									<Icon
+										name="person"
+										family="MaterialIcons"
+										size={30}
+									/>
+								</View>
+							);
+						}
+					},
 				}}
 			/>
 		</Tab.Navigator>

@@ -9,6 +9,7 @@ import { Block, Text, theme } from "galio-framework";
 
 import { Card, Icon } from "../components";
 import articles from "../constants/articles";
+import { items } from "../mock_data/mockData";
 import { argonTheme } from "../constants";
 const { width } = Dimensions.get("screen");
 
@@ -45,38 +46,38 @@ const Home = () => {
 					</Block>
 					<Block flex row>
 						<Card
-							item={articles[0]}
+							item={items.i00001}
 							style={{ marginRight: theme.SIZES.BASE }}
 						/>
-						<Card item={articles[1]} />
+						<Card item={items.i00002} />
 					</Block>
 					<Block flex row>
 						<Card
-							item={articles[2]}
+							item={items.i00003}
 							style={{ marginRight: theme.SIZES.BASE }}
 						/>
-						<Card item={articles[3]} />
+						<Card item={items.i00004} />
 					</Block>
 					<Block flex row>
 						<Card
-							item={articles[4]}
+							item={items.i00005}
 							style={{ marginRight: theme.SIZES.BASE }}
 						/>
-						<Card item={articles[5]} />
+						<Card item={items.i00006} />
 					</Block>
 					<Block flex row>
 						<Card
-							item={articles[6]}
+							item={items.i00007}
 							style={{ marginRight: theme.SIZES.BASE }}
 						/>
-						<Card item={articles[7]} />
+						<Card item={items.i00008} />
 					</Block>
 					<Block flex row>
 						<Card
-							item={articles[8]}
+							item={items.i00009}
 							style={{ marginRight: theme.SIZES.BASE }}
 						/>
-						<Card item={articles[9]} />
+						<Card item={items.i00010} />
 					</Block>
 				</Block>
 			</ScrollView>
