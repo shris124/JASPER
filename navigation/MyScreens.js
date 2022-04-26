@@ -19,6 +19,7 @@ import Elements from "../screens/Elements";
 import Home from "../screens/MyHome";
 import Detail from "../screens/Detail";
 import Landing from "../screens/Landing";
+import Login from "../screens/Login";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
 import React from "react";
@@ -237,6 +238,13 @@ export default function LandingStack(props) {
 			<Stack.Screen
 				name="Landing"
 				component={Landing}
+				option={{
+					headerTransparent: true,
+				}}
+			/>
+			<Stack.Screen
+				name="Login"
+				component={Login}
 				option={{
 					headerTransparent: true,
 				}}
