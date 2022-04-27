@@ -54,7 +54,7 @@ const Login = ({ navigation }) => {
         Create an Account
       </Text>
       <Text
-        onPress={() => navigation.navigate("Register")}
+        onPress={() => navigation.navigate("Recovery")}
         style={{ color: "grey" }}
       >
         Forgot password?
