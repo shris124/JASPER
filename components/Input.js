@@ -9,7 +9,7 @@ import { argonTheme } from "../constants";
 
 class ArInput extends React.Component {
   render() {
-    const { shadowless, success, error } = this.props;
+    const { shadowless, success, error, } = this.props;
 
     const inputStyles = [
       styles.input,

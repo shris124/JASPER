@@ -22,6 +22,7 @@ import Landing from "../screens/Landing";
 import Login from "../screens/Login";
 import Pro from "../screens/Pro";
 import Profile from "../screens/Profile";
+import Post from "../screens/Post";
 import React from "react";
 import Register from "../screens/Register";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -325,8 +326,8 @@ function AppStack(props) {
 				}}
 			/>
 			<Tab.Screen
-				name="AccountTab"
-				component={Register}
+				name="PostTab"
+				component={Post}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<View>
