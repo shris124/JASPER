@@ -17,7 +17,7 @@ const { width, height } = Dimensions.get("screen");
 const Register = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Create an Account</Text>
+      <Text style={styles.textHeader}>Create an Account</Text>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
         <Input
           placeholder="Email/Phone Number"
@@ -74,7 +74,9 @@ const Register = ({ navigation }) => {
           iconContent={<Block />}
         />
       </Block>
-      <Button onPress={() => navigation.navigate("Login")}>Register</Button>
+      <View style={styles.registButton}>
+        <Button onPress={() => navigation.navigate("Login")}>Register</Button>
+      </View>
     </View>
   );
 };
@@ -91,6 +93,14 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     shadowOpacity: 0,
     borderRadius: 99,
+  },
+  textHeader: {
+    fontWeight: "bold",
+    fontSize: 30,
+    paddingBottom: 30,
+  },
+  registButton: {
+    paddingTop: 30,
   },
 });
 

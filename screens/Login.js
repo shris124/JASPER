@@ -3,6 +3,7 @@ import { SafeAreaView, Text } from "react-native";
 import { Block, theme } from "galio-framework";
 import { TextInput } from "react-native-gesture-handler";
 import { Theme } from "../components";
+//import { ShoppingHome } from "../assets/imgs";
 import {
   auth,
   signInWithEmailAndPassword,
@@ -10,14 +11,19 @@ import {
 } from "../firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { Icon, Input } from "../components/";
+import { Icon, Input, Button } from "../components/";
 import { argonTheme, tabs } from "../constants/";
-import { StyleSheet, View, Button, Alert } from "react-native";
+import { StyleSheet, View, Alert, Image } from "react-native";
 
 const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Welcome Back!</Text>
+      <Image
+        style={styles.logo}
+        source={require("../assets/imgs/icon.png")}
+      ></Image>
+      <Image source={require("../assets/imgs/shoppingHome.png")}></Image>
+      <Text style={styles.textHeader}>Welcome Back!</Text>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
         <Input
           placeholder="Email/Phone Number"
@@ -27,15 +33,15 @@ const Login = ({ navigation }) => {
               size={11}
               style={{ marginRight: 10 }}
               color={argonTheme.COLORS.ICON}
-              name="search-zoom-in"
-              family="ArgonExtra"
+              name="mail"
+              family="Feather"
             />
           }
         />
       </Block>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
         <Input
-          right
+          //right
           placeholder="Password"
           placeholderTextColor="#6314AB"
           secureTextEntry={true}
@@ -44,25 +50,34 @@ const Login = ({ navigation }) => {
             borderRadius: 4,
             backgroundColor: "#fff",
           }}
-          iconContent={<Block />}
+          iconContent={
+            <Icon
+              size={11}
+              style={{ marginRight: 10 }}
+              color={argonTheme.COLORS.ICON}
+              name="login"
+              family="Entypo"
+            />
+          }
         />
       </Block>
-      <Text
-        onPress={() => navigation.navigate("Register")}
-        style={{ color: "grey" }}
-      >
-        Create an Account
-      </Text>
-      <Text
-        onPress={() => navigation.navigate("Recovery")}
-        style={{ color: "grey" }}
-      >
-        Forgot password?
-      </Text>
-      <Button
-        title="Sign in"
-        onPress={() => navigation.navigate("App")}
-      ></Button>
+      <View style={styles.greyButtons}>
+        <Text
+          onPress={() => navigation.navigate("Register")}
+          style={{ color: "grey" }}
+        >
+          Create an Account
+        </Text>
+        <Text
+          onPress={() => navigation.navigate("Recovery")}
+          style={{ color: "grey" }}
+        >
+          Forgot password?
+        </Text>
+      </View>
+      <View style={styles.signInButton}>
+        <Button onPress={() => navigation.navigate("App")}>Sign In</Button>
+      </View>
     </View>
   );
 };
@@ -72,6 +87,25 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  logo: {
+    width: 70,
+    height: 70,
+    position: "absolute",
+    top: 10,
+    left: 15,
+  },
+  textHeader: {
+    fontWeight: "bold",
+    fontSize: 30,
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
+  signInButton: {
+    paddingTop: 10,
+  },
+  greyButtons: {
+    paddingTop: 15,
   },
 });
 
