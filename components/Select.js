@@ -9,7 +9,7 @@ import { argonTheme } from '../constants';
 
 class DropDown extends React.Component {
   state = {
-    value: 1,
+    value: "Choose pick up location",
   }
 
   handleOnSelect = (index, value) => {
@@ -60,7 +60,7 @@ DropDown.propTypes = {
 
 const styles = StyleSheet.create({
   qty: {
-    width: 100,
+    width: 200,
     backgroundColor: argonTheme.COLORS.DEFAULT,
     paddingHorizontal: 16,
     paddingTop: 10,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   dropdown: {
     marginTop: 8,
     marginLeft: -16,
-    width: 100,
+    width: 200,
   },
 });
 

@@ -102,6 +102,10 @@ class Header extends React.Component {
 						navigation={navigation}
 					/>,
 				];
+			
+			case "Saved":
+				return; 
+
 			case "Categories":
 				return [
 					<ChatButton
@@ -309,11 +313,14 @@ class Header extends React.Component {
 		const mainPages = ["Home", "Saved"];
 		const mainPage = mainPages.includes(title);
 		const navbar = () => {
-			if (mainPage) {
+			if (title=="Home") {
 				return (
 					<Block style={{paddingVertical: theme.SIZES.BASE * 1.5}} />
 
 				);
+			}
+			else if (title=="Saved") {
+				return;
 			} else {
 				return (
 					<NavBar
