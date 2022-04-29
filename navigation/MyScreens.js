@@ -252,6 +252,27 @@ export default function LandingStack(props) {
           headerTransparent: true,
         }}
       />
+      <Stack.Screen
+        name="Elements"
+        component={Elements}
+        option={{
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Articles"
+        component={Articles}
+        option={{
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        option={{
+          headerTransparent: true,
+        }}
+      />
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
   );

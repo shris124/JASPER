@@ -2,6 +2,7 @@
 const Onboarding = require("../assets/imgs/bg.jpg");
 const Logo = require("../assets/imgs/icon.png");
 const LogoOnboarding = require("../assets/imgs/logo.png");
+const CherryBlossom = require("../assets/imgs/cherryBlossom.jpg");
 const ProfileBackground = require("../assets/imgs/profile-screen-bg.png");
 const RegisterBackground = require("../assets/imgs/register-bg.png");
 const Pro = require("../assets/imgs/getPro-bg.png");
@@ -26,6 +27,7 @@ const Products = {
 };
 
 export default {
+  CherryBlossom,
   Onboarding,
   Logo,
   LogoOnboarding,
