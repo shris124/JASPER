@@ -17,5 +17,11 @@ export default tabs = {
     { id: 'used', title: 'Used'},
     { id: 'refurbished', title: 'Refurbished'},
     { id: 'damaged', title: 'Partly Damaged'}
+  ],
+  pickUpLocations: [
+    "Red Square",
+    "Oak Hall",
+    "University Book Store",
+    "Chat for details"
   ]
 }

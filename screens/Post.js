@@ -15,7 +15,7 @@ import {
 import { Images, argonTheme, articles } from "../constants/";
 
 // Components & Constants
-import { Button, Card, Icon, Input } from "../components/";
+import { Button, Card, Icon, Input, Switch, Select } from "../components/";
 import { items } from "../mock_data/mockData";
 import Tabs from "../components/Tabs";
 import tabs from "../constants/tabs";
@@ -30,6 +30,7 @@ const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
 
 const Post = (props) => {
+	const [negotiableSwitch, setNegotiableSwitch] = React.useState(false);
 	const renderProduct = (item, index) => {
 		const { navigation } = props;
 
@@ -226,7 +227,7 @@ const Post = (props) => {
 									marginVertical: theme.SIZES.BASE * 2,
 								}}
 							>
-								<Block flex row alignItems={'flex-end'}>
+								<Block flex row alignItems={"flex-end"}>
 									<Icon
 										name="dollar"
 										family="Foundation"
@@ -235,15 +236,73 @@ const Post = (props) => {
 									<Text size={20}> {" Price"}</Text>
 									<Input
 										left
-                                        rounded={true}
-                                        borderless={true}
-                                        placeholder={" Price of your item"}
+										rounded={true}
+										borderless={true}
+										placeholder={" Price of your item"}
 										iconContent={
 											<Icon
 												name="dollar"
 												family="Foundation"
 												size={25}
 											/>
+										}
+									/>
+								</Block>
+								<Block flex row alignItems={"flex-end"}>
+									<Icon
+										name="dollar"
+										family="Foundation"
+										size={25}
+									/>
+									<Text size={20}>
+										{" "}
+										{" Make price non-negotiable"}
+									</Text>
+									<Switch
+										value={negotiableSwitch}
+										onValueChange={() =>
+											setNegotiableSwitch(true)
+										}
+									/>
+								</Block>
+								<Block flex row alignItems={"flex-end"}>
+									<Icon
+										name="directions-walk"
+										family="MaterialIcons"
+										size={25}
+									/>
+									<Text size={20}> {" Pick Up"}</Text>
+									{/* Check /component/Select.js for this  */}
+									<Select
+										defaultIndex={1}
+										options={tabs.pickUpLocations}
+									/>
+								</Block>
+								<Block flex row alignItems={"flex-end"}>
+									<Icon
+										name="truck"
+										family="Feather"
+										size={25}
+									/>
+									<Text size={20}>
+										{" Drop Off"}
+									</Text>
+									<Switch
+										value={negotiableSwitch}
+										onValueChange={() =>
+											setNegotiableSwitch(true)
+										}
+									/>
+								</Block>
+								<Block flex row alignItems={"flex-end"}>
+									<Image source={require("../assets/imgs/uw.png")} style={{width:25, height:15}}/>
+									<Text size={20}>
+										{" Only Visible to UW users"}
+									</Text>
+									<Switch
+										value={negotiableSwitch}
+										onValueChange={() =>
+											setNegotiableSwitch(true)
 										}
 									/>
 								</Block>
