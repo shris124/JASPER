@@ -2,42 +2,44 @@ import useWindowDimensions from "react-native/Libraries/Utilities/useWindowDimen
 
 export const users = {
 	u00001: {
-		userId: "12345",
+		userId: "u00001",
 		email: "12345@uw.edu",
-		firstName: "Bob",
-		lastName: "Ross",
+		userName: "Bob Ross",
+		portrait: "https://i.pinimg.com/564x/0d/b8/56/0db8569bc2c1e227bfbe51a1b0d39178.jpg",
 		uw_authentication: true,
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001"],
 	},
 	u00002: {
-		userId: "98765",
+		userId: "u00001",
 		email: "9876@uw.edu",
-		firstName: "Cristiano",
-		lastName: "Ronaldo",
+		userName: "Cristiano Ronaldo",
+		portrait: "https://i.pinimg.com/564x/cd/66/cd/cd66cdf65912b87f447790a9e9de30c2.jpg",
 		uw_authentication: true,
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001, i00002"],
 	},
 };
 
-export const conversation = {
+export const conversations = {
 	101010: {
 		conversationId: "101010",
-		participants: ["12345", "98765"],
+		participants: ["u00001", "u00002"],
 		createdAt: "2021-04-23T18:25:43.511Z",
 		updatedAt: "2021-04-23T18:45:43.511Z",
 		objectId: "i00001",
-		messages: {
-			"2021-04-23T18:25:43.511Z": {
-				content: "Hello Cris",
-				userId: "u00001",
-			},
-			"2021-04-23T18:45:43.511Z": {
+		messages: [
+			{
+				time: "2021-04-23T18:45:43.511Z",   // ISO Dates
 				content: "Hello Bob",
 				userId: "u00002",
 			},
-		},
+			{
+				time: "2021-04-23T18:25:43.511Z",
+				content: "Hello Cris",
+				userId: "u00001",
+			},
+		],
 	},
 };
 

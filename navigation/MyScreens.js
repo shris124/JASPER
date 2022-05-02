@@ -29,6 +29,7 @@ import Register from "../screens/Register";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
+import Chat from "../screens/Chat";
 
 const { width } = Dimensions.get("screen");
 
@@ -132,6 +133,49 @@ function SavedStack(props) {
   );
 }
 
+function ChatStack(props) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        mode: "card",
+        headerShown: "screen",
+      }}
+    >
+      <Stack.Screen
+        name="Chat"
+        component={Chat}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title="Chat"
+              search
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" },
+        }}
+      />
+      <Stack.Screen
+        name="Pro"
+        component={Pro}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 function ProfileStack(props) {
   return (
     <Stack.Navigator
@@ -234,9 +278,6 @@ export default function LandingStack(props) {
       <Stack.Screen
         name="Login"
         component={Login}
-        option={{
-          headerTransparent: true,
-        }}
       />
       <Stack.Screen
         name="Register"
@@ -252,6 +293,8 @@ export default function LandingStack(props) {
           headerTransparent: true,
         }}
       />
+
+      {/* The following 3 screens are development only, delete after development */}
       <Stack.Screen
         name="Elements"
         component={Elements}
@@ -273,6 +316,8 @@ export default function LandingStack(props) {
           headerTransparent: true,
         }}
       />
+      {/* Development screens above ^^^ */}
+
       <Stack.Screen name="App" component={AppStack} />
     </Stack.Navigator>
   );
@@ -366,8 +411,8 @@ function AppStack(props) {
 				}}
 			/>
 			<Tab.Screen
-				name="ElementsTab"
-				component={ElementsStack}
+				name="ChatTab"
+				component={ChatStack}
 				options={{
 					tabBarIcon: ({ focused }) => {
 						if (focused) {

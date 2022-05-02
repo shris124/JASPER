@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     position: "absolute",
-    top: 10,
+    top: 50,
     left: 15,
   },
   textHeader: {

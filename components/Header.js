@@ -190,14 +190,24 @@ class Header extends React.Component {
 				break;
 		}
 	};
+
 	renderSearch = () => {
+		const {title} = this.props
+		const searchPlaceHolder = () => {
+			if(title=="Chat"){
+				return "Search for chat history";
+			}
+			else{
+				return "What are you looking for?";
+			}
+		};
 		const { navigation } = this.props;
 		return (
 			<Input
 				right
 				color="black"
 				style={styles.search}
-				placeholder="What are you looking for?"
+				placeholder={searchPlaceHolder()}
 				placeholderTextColor={"#8898AA"}
 				onFocus={() => navigation.navigate("Pro")}
 				iconContent={
