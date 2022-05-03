@@ -6,6 +6,7 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  View,
   ScrollView,
   StyleSheet,
   TouchableWithoutFeedback,
@@ -133,7 +134,7 @@ const Post = (props) => {
                 </Text>
                 <TextInput
                   style={styles.textInput}
-                  placeholder="Describe your item "
+                  placeholder="    Describe your item "
                   multiline={true}
                   numberOfLines={6}
                   maxLength={500}
@@ -184,7 +185,10 @@ const Post = (props) => {
                   ))}
                 </ScrollView>
               </Block>
-              <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+              <View style={styles.separation}></View>
+              <Block
+                style={{ paddingTop: 20, paddingHorizontal: theme.SIZES.BASE }}
+              >
                 <Block style={styles.oneRow} flex row>
                   <Icon name="tago" family="AntDesign" size={20} />
                   <Text style={styles.smallTitle}>Tags</Text>
@@ -198,6 +202,7 @@ const Post = (props) => {
                   {conditionTabs()}
                 </Block>
               </Block>
+              <View style={styles.separation}></View>
               <Block
                 style={{
                   paddingHorizontal: theme.SIZES.BASE,
@@ -205,24 +210,21 @@ const Post = (props) => {
                 }}
               >
                 <Block style={styles.horizRow} flex row alignItems={"center"}>
-                  <Icon name="dollar" family="Foundation" size={25} />
-                  <Text style={styles.rightItem} size={20}>
-                    {" "}
-                    {" Price"}
-                  </Text>
+                  <Icon name="dollar" family="Foundation" size={20} />
+                  <Text style={styles.rightItem}> {" Price"}</Text>
                   <Input
                     left
                     rounded={true}
                     borderless={true}
                     placeholder={" Price of your item"}
                     iconContent={
-                      <Icon name="dollar" family="Foundation" size={25} />
+                      <Icon name="dollar" family="Foundation" size={20} />
                     }
                   />
                 </Block>
                 <Block style={styles.horizRow} flex row alignItems={"center"}>
-                  <Icon name="dollar" family="Foundation" size={25} />
-                  <Text style={styles.rightItem} size={20}>
+                  <Icon name="dollar" family="Foundation" size={20} />
+                  <Text style={styles.rightItem}>
                     {" "}
                     {" Make price non-negotiable"}
                   </Text>
@@ -235,20 +237,15 @@ const Post = (props) => {
                   <Icon
                     name="directions-walk"
                     family="MaterialIcons"
-                    size={25}
+                    size={20}
                   />
-                  <Text style={styles.rightItem} size={20}>
-                    {" "}
-                    {" Pick Up"}
-                  </Text>
+                  <Text style={styles.rightItem}> {" Pick Up"}</Text>
                   {/* Check /component/Select.js for this  */}
                   <Select defaultIndex={1} options={tabs.pickUpLocations} />
                 </Block>
                 <Block style={styles.horizRow} flex row alignItems={"center"}>
                   <Icon name="truck" family="Feather" size={25} />
-                  <Text style={styles.rightItem} size={20}>
-                    {" Drop Off"}
-                  </Text>
+                  <Text style={styles.rightItem}>{" Drop Off"}</Text>
                   <Switch
                     value={negotiableSwitch}
                     onValueChange={() => setNegotiableSwitch(true)}
@@ -259,7 +256,7 @@ const Post = (props) => {
                     source={require("../assets/imgs/uw.png")}
                     style={{ width: 25, height: 15 }}
                   />
-                  <Text style={styles.rightItem} size={20}>
+                  <Text style={styles.rightItem}>
                     {" Only Visible to UW users"}
                   </Text>
                   <Switch
@@ -344,6 +341,11 @@ const styles = StyleSheet.create({
   },
   rightItem: {
     paddingRight: 25,
+  },
+  separation: {
+    borderBottomColor: "#D3D3D3",
+    borderBottomWidth: 2,
+    paddingTop: 10,
   },
   smallTitle: {
     fontWeight: "bold",
