@@ -4,20 +4,29 @@ export const users = {
 	u00001: {
 		userId: "u00001",
 		email: "12345@uw.edu",
-		userName: "Bob Ross",
-		portrait: "https://i.pinimg.com/564x/0d/b8/56/0db8569bc2c1e227bfbe51a1b0d39178.jpg",
+		userName: "Joy",
+		avatar: "https://i.ibb.co/b755bN5/avatar2.png",
 		uw_authentication: true,
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001"],
 	},
 	u00002: {
-		userId: "u00001",
+		userId: "u00002",
 		email: "9876@uw.edu",
-		userName: "Cristiano Ronaldo",
-		portrait: "https://i.pinimg.com/564x/cd/66/cd/cd66cdf65912b87f447790a9e9de30c2.jpg",
+		userName: "David",
+		avatar: "https://i.ibb.co/3R6Y3pb/avatar1.png",
 		uw_authentication: true,
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001, i00002"],
+	},
+	u00003: {
+		userId: "u00003",
+		email: "23456@uw.edu",
+		userName: "Josh",
+		avatar: "https://i.ibb.co/JKPPkcv/avatar3.png",
+		uw_authentication: false,
+		interests: ["Fashion", "Sports"],
+		likedItems: ["i00003, i00009"],
 	},
 };
 
@@ -27,16 +36,40 @@ export const conversations = {
 		participants: ["u00001", "u00002"],
 		createdAt: "2021-04-23T18:25:43.511Z",
 		updatedAt: "2021-04-23T18:45:43.511Z",
-		objectId: "i00001",
+		itemId: "i00001",
 		messages: [
 			{
-				time: "2021-04-23T18:45:43.511Z",   // ISO Dates
-				content: "Hello Bob",
+				time: "2021-04-23T18:25:43.511Z",   // ISO Dates
+				content: "Great, can I pick it up at Red Square at 2PM tomorrow?",
 				userId: "u00002",
 			},
 			{
+				time: "2021-04-23T18:45:43.511Z",
+				content: "Hello David, I am free all week. When do you prefer?",
+				userId: "u00001",
+			},
+			{
+				time: "2021-04-23T18:25:43.511Z",   // ISO Dates
+				content: "Hello Joy, I am very interested in the chair, what is a good time to pick this up?",
+				userId: "u00002",
+			},
+		],
+	},
+	101011: {
+		conversationId: "101011",
+		participants: ["u00001", "u00003"],
+		createdAt: "2021-04-23T18:25:43.511Z",
+		updatedAt: "2021-04-23T18:45:43.511Z",
+		itemId: "i00009",
+		messages: [
+			{
+				time: "2021-04-23T18:45:43.511Z",   // ISO Dates
+				content: "Hi Joy, what brand is the yoga mat?",
+				userId: "u00003",
+			},
+			{
 				time: "2021-04-23T18:25:43.511Z",
-				content: "Hello Cris",
+				content: "Hello Josh, it's a Gaiam yoga mat.",
 				userId: "u00001",
 			},
 		],
@@ -46,11 +79,11 @@ export const conversations = {
 export const items = {
 	i00001: {
 		itemId: "i00001",
-		title: "Black IKEA chair adafds",
+		title: "Black IKEA chair",
 		sellerId: "u00001",
 		condition: "Brand New",
 		description:
-			"Black IKEA chair in good condition, used for a year. Afakldfjakldfjakldfjakldfjlkadjfladjf;adfjladfj",
+			"Black IKEA chair in good condition, used for a year. I am graudating from UW and moving out. You can pick this up at anytime in the day.",
 		images: [
 			"https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80",
 			"https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",

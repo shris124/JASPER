@@ -41,7 +41,7 @@ const Landing = (props) => {
 						</Button>
 					</Block>
 					{/* Temperary Buttons for Development, delete afterwards */}
-					<Text>The following buttons are for development only</Text>
+					{/* <Text>The following buttons are for development only</Text>
 					<Block center>
 						<Button
 							style={styles.button}
@@ -71,7 +71,7 @@ const Landing = (props) => {
 						>
 							Profile Page
 						</Button>
-					</Block>
+					</Block> */}
 				</Block>
 				
 			</Block>

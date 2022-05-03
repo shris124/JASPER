@@ -194,7 +194,7 @@ class Header extends React.Component {
 	renderSearch = () => {
 		const {title} = this.props
 		const searchPlaceHolder = () => {
-			if(title=="Chat"){
+			if(title=="Message Center"){
 				return "Search for chat history";
 			}
 			else{
@@ -320,8 +320,6 @@ class Header extends React.Component {
 			bgColor && { backgroundColor: bgColor },
 		];
 
-		const mainPages = ["Home", "Saved"];
-		const mainPage = mainPages.includes(title);
 		const navbar = () => {
 			if (title=="Home") {
 				return (

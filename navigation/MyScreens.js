@@ -29,6 +29,7 @@ import Register from "../screens/Register";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
+import MessageCenter from "../screens/MessageCenter";
 import Chat from "../screens/Chat";
 
 const { width } = Dimensions.get("screen");
@@ -142,12 +143,12 @@ function ChatStack(props) {
       }}
     >
       <Stack.Screen
-        name="Chat"
-        component={Chat}
+        name="MessageCenter"
+        component={MessageCenter}
         options={{
           header: ({ navigation, scene }) => (
             <Header
-              title="Chat"
+              title="Message Center"
               search
               navigation={navigation}
               scene={scene}
@@ -157,20 +158,20 @@ function ChatStack(props) {
         }}
       />
       <Stack.Screen
-        name="Pro"
-        component={Pro}
+        name="Chat"
+        component={Chat}
         options={{
           header: ({ navigation, scene }) => (
             <Header
-              title=""
+              title="David"
               back
-              white
               transparent
               navigation={navigation}
               scene={scene}
             />
           ),
-          headerTransparent: true,
+          cardStyle: { backgroundColor: "#F8F9FE" },
+          // headerTransparent: true,
         }}
       />
     </Stack.Navigator>

@@ -64,7 +64,7 @@ class Detail extends React.Component {
 	};
 
 	renderCard = (item) => {
-		return <Card item={item} style={styles.similarItems} />;
+		return <Card item={item} style={styles.similarItems} key={"similar" + item.itemId}/>;
 	};
 
 	render() {
@@ -225,7 +225,7 @@ class Detail extends React.Component {
 									style={styles.button}
 									textStyle={{ fontSize: 20 }}
 								>
-									{"Chat with " + item.sellerId}
+									{"Chat with Jessica"}
 								</Button>
 							</Block>
 							<Block style={styles.descriptionBox}>
