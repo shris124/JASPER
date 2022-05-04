@@ -30,6 +30,7 @@ const SignUp = ({ navigation }) => {
               family="Feather"
             />
           }
+          style={{width: 300}}
         />
       </Block>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
@@ -45,6 +46,7 @@ const SignUp = ({ navigation }) => {
               family="MaterialIcon"
             />
           }
+          style={{width: 300}}
         />
       </Block>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
@@ -61,6 +63,7 @@ const SignUp = ({ navigation }) => {
               family="Entypo"
             />
           }
+          style={{width: 300}}
         />
       </Block>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
@@ -77,10 +80,11 @@ const SignUp = ({ navigation }) => {
               family="Entypo"
             />
           }
+          style={{width: 300}}
         />
       </Block>
       <View style={styles.registButton}>
-        <Button onPress={() => navigation.navigate("Login")}>Sign Up</Button>
+        <Button style={{width: 220}} onPress={() => navigation.navigate("Login")}>Sign Up</Button>
       </View>
     </View>
   );
