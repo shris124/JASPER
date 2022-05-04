@@ -109,7 +109,11 @@ function SavedStack(props) {
         component={Saved}
         options={{
           header: ({ navigation, scene }) => (
-            <Header title="Saved" navigation={navigation} scene={scene} />
+            <Header
+              title="Saved Items"
+              navigation={navigation}
+              scene={scene}
+            />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
         }}
@@ -166,13 +170,11 @@ function ChatStack(props) {
             <Header
               title="David"
               back
-              transparent
               navigation={navigation}
               scene={scene}
             />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
-          // headerTransparent: true,
         }}
       />
       <Stack.Screen
@@ -182,14 +184,13 @@ function ChatStack(props) {
           header: ({ navigation, scene }) => (
             <Header
               title="Josh"
+              
               back
-              transparent
               navigation={navigation}
               scene={scene}
             />
           ),
           cardStyle: { backgroundColor: "#F8F9FE" },
-          // headerTransparent: true,
         }}
       />
     </Stack.Navigator>
@@ -219,6 +220,49 @@ function ProfileStack(props) {
           ),
           cardStyle: { backgroundColor: "#FFFFFF" },
           headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Pro"
+        component={Pro}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title=""
+              back
+              white
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function PostStack(props){
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        mode: "card",
+        headerShown: "screen",
+      }}
+    >
+      <Stack.Screen
+        name="Post"
+        component={Post}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title="Post Item"
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" },
         }}
       />
       <Stack.Screen
@@ -414,7 +458,7 @@ function AppStack(props) {
 			/>
 			<Tab.Screen
 				name="PostTab"
-				component={Post}
+				component={PostStack}
 				options={{
 					tabBarIcon: ({ focused }) => (
 						<View>

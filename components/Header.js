@@ -326,9 +326,6 @@ class Header extends React.Component {
 					<Block style={{paddingVertical: theme.SIZES.BASE * 1.5}} />
 
 				);
-			}
-			else if (title=="Saved") {
-				return;
 			} else {
 				return (
 					<NavBar

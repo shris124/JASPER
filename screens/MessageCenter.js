@@ -26,9 +26,10 @@ const renderConversation = (conversation, navigation) => {
 			? conversation.participants[1]
 			: conversation.participants[0];
 	const subjectData = users[subjectId];
-	const objectData = items[conversation.itemId];
+	const itemData = items[conversation.itemId];
 	const displayedMessage = () => {
-		const content = conversation.messages[0].content;
+		const content =
+			conversation.messages[conversation.messages.length - 1].content;
 		if (content.length > 20) {
 			return content.slice(0, 20) + "...";
 		} else {
@@ -51,16 +52,16 @@ const renderConversation = (conversation, navigation) => {
 	};
 
 	// Temp
-	const chatPage = subjectId == 'u00002' ? "Chat" : 'Chat2';
+	const chatPage = subjectId == "u00002" ? "Chat" : "Chat2";
 
 	return (
-		<TouchableOpacity onPress={() => navigation.navigate(chatPage)}>
+		<TouchableOpacity onPress={() => navigation.navigate(chatPage)} key={conversation.conversationId}>
 			<Block
 				row
 				middle
 				space="between"
 				style={{ paddingTop: 7 }}
-				key={conversation.conversationId}
+				
 			>
 				<Image
 					source={{ uri: subjectData.avatar }}
@@ -68,6 +69,11 @@ const renderConversation = (conversation, navigation) => {
 					resizeMode="cover"
 					style={styles.avatar}
 				/>
+				{subjectData.uw &&<Image
+					source={require("../assets/imgs/uw.png")}
+					style={{ width: 25, height: 15, position: 'absolute', left: 40, top: 70 }}
+					resizeMode="cover"
+				/>}
 				<Block flex>
 					<Text style={{ fontWeight: "bold", fontSize: 20 }}>
 						{subjectData.userName}
@@ -78,8 +84,8 @@ const renderConversation = (conversation, navigation) => {
 					</Text>
 				</Block>
 				<Image
-					source={{ uri: objectData.images[0] }}
-					key={`viewed-${objectData.images[0]}`}
+					source={{ uri: itemData.images[0] }}
+					key={`viewed-${itemData.images[0]}`}
 					resizeMode="cover"
 					style={styles.thumb}
 				/>
@@ -89,7 +95,7 @@ const renderConversation = (conversation, navigation) => {
 };
 
 const MessageCenter = (props) => {
-	const {navigation} = props;
+	const { navigation } = props;
 	return (
 		<Block flex center style={styles.home}>
 			<ScrollView

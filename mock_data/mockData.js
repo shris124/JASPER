@@ -6,7 +6,7 @@ export const users = {
 		email: "12345@uw.edu",
 		userName: "Joy",
 		avatar: "https://i.ibb.co/b755bN5/avatar2.png",
-		uw_authentication: true,
+		uw: true,
 		rating: 5.0,
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001"],
@@ -16,7 +16,7 @@ export const users = {
 		email: "9876@uw.edu",
 		userName: "David",
 		avatar: "https://i.ibb.co/3R6Y3pb/avatar1.png",
-		uw_authentication: true,
+		uw: true,
 		rating: 5.0,
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001, i00002"],
@@ -26,7 +26,7 @@ export const users = {
 		email: "23456@uw.edu",
 		userName: "Josh",
 		avatar: "https://i.ibb.co/JKPPkcv/avatar3.png",
-		uw_authentication: false,
+		uw: false,
 		rating: 4.5730,
 		interests: ["Fashion", "Sports"],
 		likedItems: ["i00003, i00009"],
@@ -42,18 +42,8 @@ export const conversations = {
 		itemId: "i00001",
 		messages: [
 			{
-				time: "2021-04-23T19:05:43.511Z",   // ISO Dates
-				content: "The chair is really nice, thank you.",
-				userId: "u00002",
-			},
-			{
-				time: "2021-04-23T19:00:43.511Z",   // ISO Dates
-				content: "No problem.",
-				userId: "u00001",
-			},
-			{
-				time: "2021-04-23T18:55:43.511Z",   // ISO Dates
-				content: "Great, can I pick it up at Red Square at 2PM tomorrow?",
+				time: "2021-04-23T18:25:43.511Z",   
+				content: "Hello Joy, I am very interested in the chair, what is a good time to pick this up?",
 				userId: "u00002",
 			},
 			{
@@ -62,8 +52,18 @@ export const conversations = {
 				userId: "u00001",
 			},
 			{
-				time: "2021-04-23T18:25:43.511Z",   
-				content: "Hello Joy, I am very interested in the chair, what is a good time to pick this up?",
+				time: "2021-04-23T18:55:43.511Z",   // ISO Dates
+				content: "Great, can I pick it up at Red Square at 2PM tomorrow?",
+				userId: "u00002",
+			},
+			{
+				time: "2021-04-23T19:00:43.511Z",   // ISO Dates
+				content: "No problem.",
+				userId: "u00001",
+			},
+			{
+				time: "2021-04-23T19:05:43.511Z",   // ISO Dates
+				content: "The chair is really nice, thank you.",
 				userId: "u00002",
 			},
 		],
@@ -76,8 +76,8 @@ export const conversations = {
 		itemId: "i00009",
 		messages: [
 			{
-				time: "2021-04-23T18:45:43.511Z",
-				content: "Great, see you at Red Square.",
+				time: "2021-04-23T18:25:43.511Z",   // ISO Dates
+				content: "Hi Josh, I like this yoga mat a lot, what brand is it?",
 				userId: "u00001",
 			},
 			{
@@ -86,8 +86,8 @@ export const conversations = {
 				userId: "u00003",
 			},
 			{
-				time: "2021-04-23T18:25:43.511Z",   // ISO Dates
-				content: "Hi Josh, I like this yoga mat a lot, what brand is it?",
+				time: "2021-04-23T18:45:43.511Z",
+				content: "Great, see you at Red Square.",
 				userId: "u00001",
 			},
 		],

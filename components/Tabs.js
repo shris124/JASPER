@@ -109,8 +109,9 @@ export default class Tabs extends React.Component {
   }
 
   render() {
+    const {containerStyle} = this.props;
     return (
-      <Block style={styles.container}>
+      <Block style={[styles.container, containerStyle]}>
         {this.renderMenu()}
       </Block>
     )

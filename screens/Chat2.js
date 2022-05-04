@@ -31,11 +31,8 @@ const subjectData = users[subjectId];
 const userRole = subjectId == 'u00002' ? "seller" : "buyer";
 
 const renderMessages = () => {
-	const messages = conversation.messages.reverse();
-
-	const date = new Date(conversation.updatedAt);
-
-	
+	const messages = conversation.messages;
+	// const date = new Date(conversation.updatedAt);
 	// const displayedDate = () => {
 	// 	if (Date.now() - date.getMilliseconds() >= 86400000) {
 	// 		return (

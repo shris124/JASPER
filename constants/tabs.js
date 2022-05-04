@@ -1,5 +1,6 @@
 export default tabs = {
   categories: [
+    { id: 'all', title: 'All' },
     { id: 'beauty', title: 'Beauty' },
     { id: 'books', title: 'Books' },
     { id: 'electronics', title: 'Electronics' },
@@ -19,9 +20,9 @@ export default tabs = {
     { id: 'damaged', title: 'Partly Damaged'}
   ],
   pickUpLocations: [
-    "Red Square",
-    "Oak Hall",
-    "University Book Store",
-    "Chat for details"
+    {id:"redSquare", title: "Red Square"},
+    {id:"oakHall", title: "Oak Hall"},
+    {id:"bookStore", title: "University Book Store"},
+    {id:"None", title: "Chat for details"}
   ]
 }

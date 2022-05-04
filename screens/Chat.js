@@ -32,7 +32,7 @@ const userRole = subjectId == "u00002" ? "seller" : "buyer";
 
 const renderMessages = () => {
 
-	const messages = conversation.messages.reverse();
+	const messages = conversation.messages;
 
 	const date = new Date(conversation.updatedAt);
 
@@ -173,7 +173,7 @@ const Chat = (props) => {
 					</Button>
 
 					<Block flex style={[styles.rating, styles.shadow]}>
-						<Text>How would you rate the trading experience?</Text>
+						<Text style={{fontSize: 20}}>How would you rate your experience?</Text>
 						<StarRating
 							rating={rating}
 							starSize={40}
@@ -181,6 +181,7 @@ const Chat = (props) => {
 							fullStarColor={"#FDCC0D"}
 							selectedStar={(selectedRating) => {setRating(selectedRating)}}
 						/>
+						{rating != 0 && <Text style={{color: argonTheme.COLORS.GRAY, fontSize: 20}}>Thank you for your feedback!</Text>}
 					</Block>
 				</Block>
 			</ScrollView>

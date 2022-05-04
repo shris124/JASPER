@@ -24,9 +24,6 @@ class Saved extends React.Component {
 			<Block flex center>
 				<ScrollView>
 					<Block flex style={styles.group}>
-						<Text bold size={16} style={styles.title}>
-							My Saved Items
-						</Text>
 						<Block flex>
 							<Block
 								style={{ paddingHorizontal: theme.SIZES.BASE }}
