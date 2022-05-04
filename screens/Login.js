@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { Dimensions, SafeAreaView, Text } from "react-native";
 import { Block, theme } from "galio-framework";
 import { TextInput } from "react-native-gesture-handler";
 import { Theme } from "../components";
@@ -15,6 +15,8 @@ import { Icon, Input, Button } from "../components/";
 import { argonTheme, tabs } from "../constants/";
 import { StyleSheet, View, Alert, Image } from "react-native";
 
+const { width } = Dimensions.get("screen");
+
 const Login = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -22,11 +24,11 @@ const Login = ({ navigation }) => {
         style={styles.logo}
         source={require("../assets/imgs/icon.png")}
       ></Image>
-      <Image source={require("../assets/imgs/shoppingHome.png")}></Image>
+      <Image source={require("../assets/imgs/login.png")} style={{width: width, height: 320}}></Image>
       <Text style={styles.textHeader}>Welcome Back!</Text>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
         <Input
-          placeholder="Email/Phone Number"
+          placeholder="Email"
           placeholderTextColor="#6314AB"
           iconContent={
             <Icon
@@ -41,15 +43,9 @@ const Login = ({ navigation }) => {
       </Block>
       <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
         <Input
-          //right
           placeholder="Password"
           placeholderTextColor="#6314AB"
           secureTextEntry={true}
-          style={{
-            borderColor: argonTheme.COLORS.INFO,
-            borderRadius: 4,
-            backgroundColor: "#fff",
-          }}
           iconContent={
             <Icon
               size={11}
@@ -63,8 +59,8 @@ const Login = ({ navigation }) => {
       </Block>
       <View style={styles.greyButtons}>
         <Text
-          onPress={() => navigation.navigate("Register")}
-          style={{ color: "grey" }}
+          onPress={() => navigation.navigate("SignUp")}
+          style={{ color: "grey", marginBottom: 10}}
         >
           Create an Account
         </Text>
@@ -76,7 +72,7 @@ const Login = ({ navigation }) => {
         </Text>
       </View>
       <View style={styles.signInButton}>
-        <Button onPress={() => navigation.navigate("App")}>Sign In</Button>
+        <Button onPress={() => navigation.navigate("App")} textStyle={{fontSize: 15, fontWeight: '600'}}>Sign In</Button>
       </View>
     </View>
   );

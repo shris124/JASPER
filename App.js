@@ -10,7 +10,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from "react-native-screens";
 enableScreens();
 
-import Screens from "./navigation/Screens";
 import MyScreens from "./navigation/MyScreens";
 import { Images, articles, argonTheme } from "./constants";
 import { SafeAreaView } from "react-native-safe-area-context";

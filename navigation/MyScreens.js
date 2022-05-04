@@ -25,7 +25,7 @@ import Profile from "../screens/Profile";
 import Post from "../screens/Post";
 import React from "react";
 import Recovery from "../screens/Recovery";
-import Register from "../screens/Register";
+import SignUp from "../screens/SignUp";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -299,8 +299,8 @@ export default function LandingStack(props) {
         component={Login}
       />
       <Stack.Screen
-        name="Register"
-        component={Register}
+        name="SignUp"
+        component={SignUp}
         option={{
           headerTransparent: true,
         }}
