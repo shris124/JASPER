@@ -12,14 +12,14 @@ import { Button, Card, Icon } from "../components";
 import articles from "../constants/articles";
 import { items, users, conversations } from "../mock_data/mockData";
 import { argonTheme } from "../constants";
-import StarRating from "react-native-star-rating";
 const { width } = Dimensions.get("screen");
+
 
 // Set to constant for presentation
 const conversationList = Object.keys(conversations).map(
 	(key) => conversations[key]
 );
-const conversation = conversationList[0];
+const conversation = conversationList[1];
 const itemData = items[conversation.itemId];
 const userId = users.u00001.userId;
 const userData = users[userId];
@@ -28,14 +28,14 @@ const subjectId =
 		? conversation.participants[1]
 		: conversation.participants[0];
 const subjectData = users[subjectId];
-const userRole = subjectId == "u00002" ? "seller" : "buyer";
+const userRole = subjectId == 'u00002' ? "seller" : "buyer";
 
 const renderMessages = () => {
-
 	const messages = conversation.messages.reverse();
 
 	const date = new Date(conversation.updatedAt);
 
+	
 	// const displayedDate = () => {
 	// 	if (Date.now() - date.getMilliseconds() >= 86400000) {
 	// 		return (
@@ -71,16 +71,9 @@ const renderMessages = () => {
 				flex
 				style={[
 					styles.textBox,
-					styles.shadow,
 					speaker == SELF
-						? {
-								backgroundColor: argonTheme.COLORS.LABEL,
-								marginLeft: 50,
-						  }
-						: {
-								backgroundColor: argonTheme.COLORS.BLOCK,
-								marginRight: 50,
-						  },
+						? { backgroundColor: argonTheme.COLORS.LABEL, marginLeft: 50}
+						: { backgroundColor: argonTheme.COLORS.BLOCK, marginRight: 50},
 				]}
 			>
 				<Text>{message.content}</Text>
@@ -117,9 +110,7 @@ const renderMessages = () => {
 	});
 };
 
-const Chat = (props) => {
-	const [rating, setRating] = React.useState(0.0);
-
+const Chat2 = (props) => {
 	const { navigation } = props;
 	return (
 		<Block flex center style={styles.home}>
@@ -153,35 +144,11 @@ const Chat = (props) => {
 						{renderMessages()}
 					</Block>
 
-					{userRole == "buyer" && (
-						<Block style={{borderWidth: 10, backgroundColor: argonTheme.COLORS.WARNING}}>
-							<Button
-								style={styles.button}
-								textStyle={{ fontSize: 15, fontWeight: "600" }}
-							>
-								Pay the Seller
-							</Button>
-						</Block>
-					)}
-
-					<Button
-						color="success"
-						style={styles.button}
-						textStyle={{ fontSize: 15, fontWeight: "600" }}
-					>
-						David has paid you 25$
-					</Button>
-
-					<Block flex style={[styles.rating, styles.shadow]}>
-						<Text>How would you rate the trading experience?</Text>
-						<StarRating
-							rating={rating}
-							starSize={40}
-							starStyle={styles.stars}
-							fullStarColor={"#FDCC0D"}
-							selectedStar={(selectedRating) => {setRating(selectedRating)}}
-						/>
-					</Block>
+					{userRole == 'buyer' && <Block center>
+						<Button style={styles.button} textStyle={{fontSize: 15, fontWeight: '600'}}>
+							Pay the Seller
+						</Button>
+					</Block>}
 				</Block>
 			</ScrollView>
 		</Block>
@@ -221,9 +188,14 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		borderRadius: 20,
-		alignSelf: "center",
+		shadowColor: "black",
+		shadowOffset: { width: 0, height: 2 },
+		shadowRadius: 3,
+		shadowOpacity: 0.2,
+		elevation: 3,
+		alignSelf: 'center',
 	},
-	rating: {
+	ratingButton: {
 		marginHorizontal: 0,
 		backgroundColor: argonTheme.COLORS.BLOCK,
 		borderRadius: 20,
@@ -231,13 +203,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		paddingVertical: 10,
 	},
-	shadow: {
-		shadowColor: "black",
-		shadowOffset: { width: 0, height: 2 },
-		shadowRadius: 3,
-		shadowOpacity: 0.2,
-		elevation: 3,
-	},
 });
 
-export default Chat;
+export default Chat2;

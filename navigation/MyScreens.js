@@ -31,6 +31,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import MessageCenter from "../screens/MessageCenter";
 import Chat from "../screens/Chat";
+import Chat2 from "../screens/Chat2";
 
 const { width } = Dimensions.get("screen");
 
@@ -164,6 +165,23 @@ function ChatStack(props) {
           header: ({ navigation, scene }) => (
             <Header
               title="David"
+              back
+              transparent
+              navigation={navigation}
+              scene={scene}
+            />
+          ),
+          cardStyle: { backgroundColor: "#F8F9FE" },
+          // headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="Chat2"
+        component={Chat2}
+        options={{
+          header: ({ navigation, scene }) => (
+            <Header
+              title="Josh"
               back
               transparent
               navigation={navigation}

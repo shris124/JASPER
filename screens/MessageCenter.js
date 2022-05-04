@@ -50,8 +50,11 @@ const renderConversation = (conversation, navigation) => {
 		}
 	};
 
+	// Temp
+	const chatPage = subjectId == 'u00002' ? "Chat" : 'Chat2';
+
 	return (
-		<TouchableOpacity onPress={() => navigation.navigate("Chat")}>
+		<TouchableOpacity onPress={() => navigation.navigate(chatPage)}>
 			<Block
 				row
 				middle
