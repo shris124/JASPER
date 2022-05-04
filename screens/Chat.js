@@ -31,7 +31,6 @@ const subjectData = users[subjectId];
 const userRole = subjectId == "u00002" ? "seller" : "buyer";
 
 const renderMessages = () => {
-
 	const messages = conversation.messages;
 
 	const date = new Date(conversation.updatedAt);
@@ -154,7 +153,12 @@ const Chat = (props) => {
 					</Block>
 
 					{userRole == "buyer" && (
-						<Block style={{borderWidth: 10, backgroundColor: argonTheme.COLORS.WARNING}}>
+						<Block
+							style={{
+								borderWidth: 10,
+								backgroundColor: argonTheme.COLORS.WARNING,
+							}}
+						>
 							<Button
 								style={styles.button}
 								textStyle={{ fontSize: 15, fontWeight: "600" }}
@@ -163,25 +167,38 @@ const Chat = (props) => {
 							</Button>
 						</Block>
 					)}
-
-					<Button
-						color="success"
-						style={styles.button}
-						textStyle={{ fontSize: 15, fontWeight: "600" }}
-					>
-						David has paid you 25$
-					</Button>
-
+					<Block center>
+						<Button
+							color={argonTheme.COLORS.SECONDARY}
+							style={styles.button}
+							textStyle={{ fontSize: 15, fontWeight: "600" }}
+						>
+							David has paid you 25$
+						</Button>
+					</Block>
 					<Block flex style={[styles.rating, styles.shadow]}>
-						<Text style={{fontSize: 20}}>How would you rate your experience?</Text>
+						<Text style={{ fontSize: 20 }}>
+							How would you rate your experience?
+						</Text>
 						<StarRating
 							rating={rating}
 							starSize={40}
 							starStyle={styles.stars}
 							fullStarColor={"#FDCC0D"}
-							selectedStar={(selectedRating) => {setRating(selectedRating)}}
+							selectedStar={(selectedRating) => {
+								setRating(selectedRating);
+							}}
 						/>
-						{rating != 0 && <Text style={{color: argonTheme.COLORS.GRAY, fontSize: 20}}>Thank you for your feedback!</Text>}
+						{rating != 0 && (
+							<Text
+								style={{
+									color: argonTheme.COLORS.GRAY,
+									fontSize: 20,
+								}}
+							>
+								Thank you for your feedback!
+							</Text>
+						)}
 					</Block>
 				</Block>
 			</ScrollView>
@@ -199,6 +216,7 @@ const styles = StyleSheet.create({
 	button: {
 		marginBottom: theme.SIZES.BASE,
 		width: width - theme.SIZES.BASE * 4,
+		backgroundColor: argonTheme.COLORS.SECONDARY,
 	},
 	home: {
 		width: width,
