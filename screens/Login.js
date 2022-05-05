@@ -13,13 +13,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 import { Icon, Input, Button } from "../components/";
 import { argonTheme, tabs } from "../constants/";
-import { StyleSheet, View, Alert, Image } from "react-native";
+import { StyleSheet, Alert, Image } from "react-native";
 
 const { width } = Dimensions.get("screen");
 
 const Login = ({ navigation }) => {
 	return (
-		<View style={styles.container}>
+		<Block style={styles.container}>
 			<Image
 				style={styles.logo}
 				source={require("../assets/imgs/icon.png")}
@@ -62,7 +62,7 @@ const Login = ({ navigation }) => {
           style={{width: 300}}
 				/>
 			</Block>
-			<View style={styles.greyButtons}>
+			<Block style={styles.greyButtons}>
 				<Text
 					onPress={() => navigation.navigate("SignUp")}
 					style={{ color: "grey", marginBottom: 10 }}
@@ -73,17 +73,17 @@ const Login = ({ navigation }) => {
 					onPress={() => navigation.navigate("Recovery")}
 					style={{ color: "grey" }}
 				>
-					Forgot password?
+					Forgot password
 				</Text>
-			</View>
+			</Block>
 			<Button
 				onPress={() => navigation.navigate("App")}
-				style={{ width: 220, marginTop: 20, justifyContent:'center', alignItems:'center' }}
+				style={{ width: width - theme.SIZES.BASE * 4, marginTop: 20, justifyContent:'center', alignItems:'center', borderRadius: 30 }}
 				textStyle={{ fontSize: 15, fontWeight: "600" }}
 			>
 				Sign In
 			</Button>
-		</View>
+		</Block>
 	);
 };
 
@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
 	},
 	greyButtons: {
 		paddingTop: 15,
+		alignItems: 'center'
 	},
 });
 

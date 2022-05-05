@@ -32,6 +32,8 @@ const cardWidth = width - theme.SIZES.BASE * 2;
 
 const Post = (props) => {
 	const [negotiableSwitch, setNegotiableSwitch] = React.useState(false);
+	const [dropOffSwitch, setDropOffSwitch] = React.useState(false);
+	const [UWVisibleSwitch, setUWVisibleSwitch] = React.useState(false);
 	const [descriptionInput, setDescriptionInput] = React.useState("");
 	const [imgUris, setImgUris] = React.useState([]);
 	const iconSize = 25;
@@ -310,8 +312,8 @@ const Post = (props) => {
 								</Text>
 							</Block>
 							<Switch
-								value={negotiableSwitch}
-								onValueChange={() => setNegotiableSwitch(true)}
+								value={dropOffSwitch}
+								onValueChange={() => setDropOffSwitch(true)}
 							/>
 						</Block>
 						<Block
@@ -336,15 +338,15 @@ const Post = (props) => {
 								</Text>
 							</Block>
 							<Switch
-								value={negotiableSwitch}
-								onValueChange={() => setNegotiableSwitch(true)}
+								value={UWVisibleSwitch}
+								onValueChange={() => setUWVisibleSwitch(true)}
 							/>
 						</Block>
 					</Block>
 					<Block flex center style={{ marginBottom: 50 }}>
 						<Button
 							textStyle={{ fontSize: 20, fontWeight: "600" }}
-							style={{ width: width - theme.SIZES.BASE * 2 }}
+							style={{ width: width - theme.SIZES.BASE * 2, borderRadius: 30 }}
 						>
 							Post Item
 						</Button>
