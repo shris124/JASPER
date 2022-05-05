@@ -24,5 +24,5 @@ export default tabs = {
     {id:"oakHall", title: "Oak Hall"},
     {id:"bookStore", title: "University Book Store"},
     {id:"None", title: "Chat for details"}
-  ]
+  ],
 }

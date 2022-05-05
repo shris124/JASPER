@@ -341,10 +341,13 @@ const Post = (props) => {
 							/>
 						</Block>
 					</Block>
-					<Block flex center style={{marginBottom: 50}}>
-						<Button textStyle={{fontSize: 20, fontWeight: '600'}} style={{width: width - theme.SIZES.BASE * 2}}>
-              Post Item
-            </Button>
+					<Block flex center style={{ marginBottom: 50 }}>
+						<Button
+							textStyle={{ fontSize: 20, fontWeight: "600" }}
+							style={{ width: width - theme.SIZES.BASE * 2 }}
+						>
+							Post Item
+						</Button>
 					</Block>
 				</Block>
 			</ScrollView>

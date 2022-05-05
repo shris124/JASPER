@@ -1,9 +1,9 @@
 import {
-  Dimensions,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Image,
+	Dimensions,
+	StyleSheet,
+	View,
+	TouchableOpacity,
+	Image,
 } from "react-native";
 // header for screens
 import { Header, Icon } from "../components";
@@ -40,350 +40,352 @@ const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 const CustomTabBarButton = ({ children, onPress }) => (
-  <TouchableOpacity
-    style={[styles.customButton, styles.shadow]}
-    onPress={onPress}
-  >
-    <View
-      style={{
-        width: 70,
-        height: 70,
-        borderRadius: 35,
-        backgroundColor: argonTheme.COLORS.PRIMARY,
-      }}
-    >
-      {children}
-    </View>
-  </TouchableOpacity>
+	<TouchableOpacity
+		style={[styles.customButton, styles.shadow]}
+		onPress={onPress}
+	>
+		<View
+			style={{
+				width: 70,
+				height: 70,
+				borderRadius: 35,
+				backgroundColor: argonTheme.COLORS.PRIMARY,
+			}}
+		>
+			{children}
+		</View>
+	</TouchableOpacity>
 );
 
 function ElementsStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Elements"
-        component={Elements}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Elements" navigation={navigation} scene={scene} />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen
+				name="Elements"
+				component={Elements}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Elements"
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 function SavedStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Saved"
-        component={Saved}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Saved Items"
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="Saved"
+				component={Saved}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Saved Items"
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 function ChatStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="MessageCenter"
-        component={MessageCenter}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Message Center"
-              search
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Chat"
-        component={Chat}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="David"
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Chat2"
-        component={Chat2}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Josh"
-              
-              back
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="MessageCenter"
+				component={MessageCenter}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Message Center"
+							search
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 function ProfileStack(props) {
-  return (
-    <Stack.Navigator
-      initialRouteName="Profile"
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              transparent
-              white
-              title="Profile"
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#FFFFFF" },
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			initialRouteName="Profile"
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="Profile"
+				component={Profile}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							transparent
+							white
+							title="Profile"
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#FFFFFF" },
+					headerTransparent: true,
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
-function PostStack(props){
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Post"
-        component={Post}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Post Item"
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Pro"
-        component={Pro}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title=""
-              back
-              white
-              transparent
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          headerTransparent: true,
-        }}
-      />
-    </Stack.Navigator>
-  );
+function PostStack(props) {
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="Post"
+				component={Post}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Post Item"
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Pro"
+				component={Pro}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title=""
+							back
+							white
+							transparent
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					headerTransparent: true,
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 function HomeStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
-        headerShown: "screen",
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header
-              title="Home"
-              tabs={tabs.categories}
-              search
-              navigation={navigation}
-              scene={scene}
-            />
-          ),
-          cardStyle: { backgroundColor: "#F8F9FE" },
-        }}
-      />
-      <Stack.Screen
-        name="Detail"
-        component={Detail}
-        options={{
-          header: ({ navigation, scene }) => (
-            <Header title="Detail" back navigation={navigation} scene={scene} />
-          ),
-        }}
-      />
-    </Stack.Navigator>
-  );
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
+				headerShown: "screen",
+			}}
+		>
+			<Stack.Screen
+				name="Home"
+				component={Home}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Home"
+							tabs={tabs.categories}
+							search
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Detail"
+				component={Detail}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Detail"
+							back
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+				}}
+			/>
+		</Stack.Navigator>
+	);
 }
 
 export default function LandingStack(props) {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        mode: "card",
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				mode: "card",
         headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Landing"
-        component={Landing}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="Recovery"
-        component={Recovery}
-        option={{
-          headerTransparent: true,
-        }}
-      />
+			}}
+		>
+			<Stack.Screen
+				name="Landing"
+				component={Landing}
+				options={{
+					headerTransparent: true,
+				}}
+			/>
+			<Stack.Screen name="Login" component={Login}/>
+			<Stack.Screen
+				name="SignUp"
+				component={SignUp}
+			/>
+			<Stack.Screen
+				name="Recovery"
+				component={Recovery}
+			/>
 
-      {/* The following 3 screens are development only, delete after development */}
-      <Stack.Screen
-        name="Elements"
-        component={Elements}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="Articles"
-        component={Articles}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        option={{
-          headerTransparent: true,
-        }}
-      />
-      {/* Development screens above ^^^ */}
+			<Stack.Screen
+				name="Chat"
+				component={Chat}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="David"
+							back
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+          headerShown: true,
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
+			<Stack.Screen
+				name="Chat2"
+				component={Chat2}
+				options={{
+					header: ({ navigation, scene }) => (
+						<Header
+							title="Josh"
+							back
+							navigation={navigation}
+							scene={scene}
+						/>
+					),
+          headerShown: true,
+					cardStyle: { backgroundColor: "#F8F9FE" },
+				}}
+			/>
 
-      <Stack.Screen name="App" component={AppStack} />
-    </Stack.Navigator>
-  );
+			{/* The following 3 screens are development only, delete after development */}
+			<Stack.Screen
+				name="Elements"
+				component={Elements}
+				option={{
+					headerTransparent: true,
+				}}
+			/>
+			<Stack.Screen
+				name="Articles"
+				component={Articles}
+				option={{
+					headerTransparent: true,
+				}}
+			/>
+			<Stack.Screen
+				name="Profile"
+				component={Profile}
+				option={{
+					headerTransparent: true,
+				}}
+			/>
+			{/* Development screens above ^^^ */}
+
+			<Stack.Screen name="App" component={AppStack} />
+		</Stack.Navigator>
+	);
 }
 
 function AppStack(props) {
@@ -538,26 +540,26 @@ function AppStack(props) {
 }
 
 const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: argonTheme.COLORS.BLACK,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    shadowOpacity: 0.1,
-    elevation: 5,
-  },
-  bottomNav: {
-    position: "absolute",
-    bottom: 25,
-    left: 20,
-    right: 20,
-    elevation: 0,
-    backgroundColor: argonTheme.COLORS.WHITE,
-    borderRadius: 15,
-    height: 90,
-  },
-  customButton: {
-    top: -30,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+	shadow: {
+		shadowColor: argonTheme.COLORS.BLACK,
+		shadowOffset: { width: 0, height: 2 },
+		shadowRadius: 4,
+		shadowOpacity: 0.1,
+		elevation: 5,
+	},
+	bottomNav: {
+		position: "absolute",
+		bottom: 25,
+		left: 20,
+		right: 20,
+		elevation: 0,
+		backgroundColor: argonTheme.COLORS.WHITE,
+		borderRadius: 15,
+		height: 90,
+	},
+	customButton: {
+		top: -30,
+		justifyContent: "center",
+		alignItems: "center",
+	},
 });

@@ -27,9 +27,11 @@ const renderConversation = (conversation, navigation) => {
 			: conversation.participants[0];
 	const subjectData = users[subjectId];
 	const itemData = items[conversation.itemId];
+	const latestMessage = conversation.messages[conversation.messages.length - 1];
 	const displayedMessage = () => {
-		const content =
-			conversation.messages[conversation.messages.length - 1].content;
+		const content = latestMessage.contentType === "text" ?
+		latestMessage.content :
+			"[" + latestMessage.contentType.charAt(0).toUpperCase() + latestMessage.contentType.slice(1) + "]";
 		if (content.length > 20) {
 			return content.slice(0, 20) + "...";
 		} else {

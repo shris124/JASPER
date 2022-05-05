@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
-import { Button, Card, Icon } from "../components";
+import { Button, Card, Icon, Input } from "../components";
 import articles from "../constants/articles";
 import { items, users, conversations } from "../mock_data/mockData";
-import { argonTheme } from "../constants";
+import { argonTheme, Images } from "../constants";
 import StarRating from "react-native-star-rating";
 const { width } = Dimensions.get("screen");
 
@@ -33,8 +33,7 @@ const userRole = subjectId == "u00002" ? "seller" : "buyer";
 const renderMessages = () => {
 	const messages = conversation.messages;
 
-	const date = new Date(conversation.updatedAt);
-
+	// const date = new Date(conversation.updatedAt);
 	// const displayedDate = () => {
 	// 	if (Date.now() - date.getMilliseconds() >= 86400000) {
 	// 		return (
@@ -54,37 +53,94 @@ const renderMessages = () => {
 		const SELF = 0;
 		const SUBJECT = 1;
 		const speaker = message.userId == userId ? SELF : SUBJECT;
+		const uw = users[message.userId].uw;
+		const uw_horz_offset = speaker == SELF ? 48 : 38;
 		const avatar = (
-			<Image
-				source={{ uri: avatarUri }}
-				resizeMode="cover"
-				style={[
-					styles.avatar,
-					speaker == SELF ? { marginLeft: 10 } : { marginRight: 10 },
-				]}
-			/>
-		);
-
-		const messageContent = (
-			<Block
-				flex
-				style={[
-					styles.textBox,
-					styles.shadow,
-					speaker == SELF
-						? {
-								backgroundColor: argonTheme.COLORS.LABEL,
-								marginLeft: 50,
-						  }
-						: {
-								backgroundColor: argonTheme.COLORS.BLOCK,
-								marginRight: 50,
-						  },
-				]}
-			>
-				<Text>{message.content}</Text>
+			<Block>
+				<Image
+					source={{ uri: avatarUri }}
+					resizeMode="cover"
+					style={[
+						styles.avatar,
+						speaker == SELF
+							? { marginLeft: 10 }
+							: { marginRight: 10 },
+					]}
+				/>
+				{uw && (
+					<Image
+						source={require("../assets/imgs/uw.png")}
+						style={{
+							width: 25,
+							height: 15,
+							position: "absolute",
+							left: uw_horz_offset,
+							top: 43,
+						}}
+						resizeMode="cover"
+					/>
+				)}
 			</Block>
 		);
+
+		const messageContent = () => {
+			if (message.contentType === "text") {
+				return (
+					<Block flex>
+						<Block
+							style={[
+								styles.textBox,
+								styles.shadow,
+								speaker == SELF
+									? {
+											backgroundColor:
+												argonTheme.COLORS.LABEL,
+											marginLeft: 50,
+											alignSelf: "flex-end",
+									  }
+									: {
+											backgroundColor:
+												argonTheme.COLORS.BLOCK,
+											marginRight: 50,
+											alignSelf: "flex-start",
+									  },
+							]}
+						>
+							<Text>{message.content}</Text>
+						</Block>
+					</Block>
+				);
+			} else if (message.contentType === "paymentInfo") {
+				return (
+					<Block flex>
+						<Block
+							style={[
+								styles.textBox,
+								styles.shadow,
+								speaker == SELF
+									? {
+											backgroundColor:
+												argonTheme.COLORS.LABEL,
+											marginLeft: 50,
+											alignSelf: "flex-end",
+									  }
+									: {
+											backgroundColor:
+												argonTheme.COLORS.BLOCK,
+											marginRight: 50,
+											alignSelf: "flex-start",
+									  },
+							]}
+						>
+							<Image
+								source={require("../assets/imgs/venmo-QR.png")}
+								style={{ height: 200, width: 200 }}
+							/>
+						</Block>
+					</Block>
+				);
+			}
+		};
 
 		if (speaker == SELF) {
 			return (
@@ -95,7 +151,7 @@ const renderMessages = () => {
 					style={{ paddingTop: 7, marginVertical: 5 }}
 					key={conversation.conversationId + "_" + idx}
 				>
-					{messageContent}
+					{messageContent()}
 					{avatar}
 				</Block>
 			);
@@ -109,11 +165,164 @@ const renderMessages = () => {
 					key={conversation.conversationId + "_" + idx}
 				>
 					{avatar}
-					{messageContent}
+					{messageContent()}
 				</Block>
 			);
 		}
 	});
+};
+
+const ratingBar = (rating, setRating) => {
+	return (
+		<Block flex style={[styles.rating, styles.shadow]}>
+			<Text style={{ fontSize: 20 }}>
+				How would you rate your experience?
+			</Text>
+			<StarRating
+				rating={rating}
+				starSize={40}
+				starStyle={styles.stars}
+				fullStarColor={"#FDCC0D"}
+				selectedStar={(selectedRating) => {
+					setRating(selectedRating);
+				}}
+			/>
+			{rating != 0 && (
+				<Text
+					style={{
+						color: argonTheme.COLORS.GRAY,
+						fontSize: 20,
+					}}
+				>
+					Thank you for your feedback!
+				</Text>
+			)}
+		</Block>
+	);
+};
+
+const togglePaymentOptions = (inputBoxHeight, setInputBoxHeight) => {
+	const expandHeight = 280;
+	if (inputBoxHeight === 90) {
+		setInputBoxHeight(expandHeight);
+	} else {
+		setInputBoxHeight(90);
+	}
+};
+
+const userInputBar = () => {
+	const [inputBoxHeight, setInputBoxHeight] = React.useState(90);
+	const [paymentToggled, setPaymentToggled] = React.useState(false);
+
+	const paymentButton = () => {
+		if (paymentToggled) {
+			return (
+				<Button
+					onlyIcon
+					icon="keyboard-arrow-down"
+					iconFamily="MeterialIcons"
+					iconSize={20}
+					iconColor={theme.COLORS.BLACK}
+					color={"transparent"}
+					style={{ width: 30, height: 30, borderWidth: 2 }}
+					onPress={() => {
+						setPaymentToggled(false);
+						togglePaymentOptions(inputBoxHeight, setInputBoxHeight);
+					}}
+				/>
+			);
+		} else {
+			return (
+				<Button
+					onlyIcon
+					icon="payments"
+					iconFamily="MeterialIcons"
+					iconSize={20}
+					iconColor={theme.COLORS.BLACK}
+					color={"transparent"}
+					style={{ width: 30, height: 30, borderWidth: 2 }}
+					onPress={() => {
+						setPaymentToggled(true);
+						togglePaymentOptions(inputBoxHeight, setInputBoxHeight);
+					}}
+				/>
+			);
+		}
+	};
+	return (
+		<Block
+			style={[styles.inputBox, styles.shadow, { height: inputBoxHeight }]}
+		>
+			<Block row top middle>
+				<Block middle style={[styles.button, { marginLeft: 10 }]}>
+					{paymentButton()}
+				</Block>
+				<Input
+					iconContent={<Block />}
+					placeholder=""
+					style={{ width: (width / 6) * 4 - 20, marginHorizontal: 5 }}
+				></Input>
+				<Block style={styles.button}>
+					<Button
+						onlyIcon
+						icon="tag-faces"
+						iconFamily="MeterialIcons"
+						iconSize={30}
+						iconColor={theme.COLORS.BLACK}
+						color={"transparent"}
+						style={{ width: 30, height: 30 }}
+					/>
+				</Block>
+				<Block style={[styles.button, { marginRight: 10 }]}>
+					<Button
+						onlyIcon
+						icon="add-circle-outline"
+						iconFamily="MeterialIcons"
+						iconSize={30}
+						iconColor={theme.COLORS.BLACK}
+						color={"transparent"}
+						style={{ width: 30, height: 30 }}
+					/>
+				</Block>
+			</Block>
+			{paymentToggled && (
+				<Block>
+					<Text style={styles.title}>Send payment information</Text>
+					<ScrollView
+						horizontal={true}
+						pagingEnabled={true}
+						decelerationRate={0}
+						scrollEventThrottle={16}
+						snapToAlignment="center"
+						showsHorizontalScrollIndicator={false}
+						snapToInterval={width - theme.SIZES.BASE * 1.625}
+						contentContainerStyle={{
+							paddingHorizontal: theme.SIZES.BASE / 2,
+						}}
+						style={{
+							marginBottom: theme.SIZES.BASE * 2,
+						}}
+					>
+						{userData.paymentOptions.map((paymentOption) => (
+							<TouchableOpacity style={{}} key={paymentOption}>
+								<Image
+									source={
+										Images.PaymentOptionLogos[paymentOption]
+									}
+									style={{
+										width: 130,
+										height: 130,
+										marginHorizontal: theme.SIZES.BASE,
+										borderRadius: 15,
+									}}
+								/>
+							</TouchableOpacity>
+						))}
+					</ScrollView>
+				</Block>
+			)}
+		</Block>
+	);
 };
 
 const Chat = (props) => {
@@ -125,10 +334,11 @@ const Chat = (props) => {
 			<ScrollView
 				showsVerticalScrollIndicator={false}
 				contentContainerStyle={styles.articles}
+				style={{ overflow: "visible" }}
 			>
 				<Block flex>
-					<Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-						{/* <TouchableOpacity
+					{/* <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+						<TouchableOpacity
 							onPress={() =>
 								navigation.navigate("Message Center")
 							}
@@ -146,13 +356,13 @@ const Chat = (props) => {
 									style={styles.thumb}
 								/>
 							</Block>
-						</TouchableOpacity> */}
-					</Block>
+						</TouchableOpacity>
+					</Block> */}
 					<Block style={{ marginVertical: 10 }}>
 						{renderMessages()}
 					</Block>
 
-					{userRole == "buyer" && (
+					{/* {userRole == "buyer" && (
 						<Block
 							style={{
 								borderWidth: 10,
@@ -166,42 +376,11 @@ const Chat = (props) => {
 								Pay the Seller
 							</Button>
 						</Block>
-					)}
-					<Block center>
-						<Button
-							color={argonTheme.COLORS.SECONDARY}
-							style={styles.button}
-							textStyle={{ fontSize: 15, fontWeight: "600" }}
-						>
-							David has paid you 25$
-						</Button>
-					</Block>
-					<Block flex style={[styles.rating, styles.shadow]}>
-						<Text style={{ fontSize: 20 }}>
-							How would you rate your experience?
-						</Text>
-						<StarRating
-							rating={rating}
-							starSize={40}
-							starStyle={styles.stars}
-							fullStarColor={"#FDCC0D"}
-							selectedStar={(selectedRating) => {
-								setRating(selectedRating);
-							}}
-						/>
-						{rating != 0 && (
-							<Text
-								style={{
-									color: argonTheme.COLORS.GRAY,
-									fontSize: 20,
-								}}
-							>
-								Thank you for your feedback!
-							</Text>
-						)}
-					</Block>
+					)} */}
+					{conversation.tradeEnded && ratingBar(rating, setRating)}
 				</Block>
 			</ScrollView>
+			{userInputBar()}
 		</Block>
 	);
 };
@@ -214,9 +393,14 @@ const styles = StyleSheet.create({
 		borderWidth: 0,
 	},
 	button: {
-		marginBottom: theme.SIZES.BASE,
-		width: width - theme.SIZES.BASE * 4,
-		backgroundColor: argonTheme.COLORS.SECONDARY,
+		marginVertical: 10,
+	},
+	payButton: {
+		height: 30,
+		width: 30,
+		borderRadius: 20,
+		borderColor: theme.COLORS.BLACK,
+		borderWidth: 2,
 	},
 	home: {
 		width: width,
@@ -225,9 +409,6 @@ const styles = StyleSheet.create({
 	articles: {
 		width: width - theme.SIZES.BASE * 2,
 		paddingVertical: theme.SIZES.BASE,
-	},
-	title: {
-		textDecorationLine: "underline",
 	},
 	thumb: {
 		borderRadius: 20,
@@ -240,7 +421,13 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		borderRadius: 20,
-		alignSelf: "center",
+	},
+	title: {
+		fontWeight: "600",
+		fontSize: 18,
+		color: argonTheme.COLORS.HEADER,
+		marginLeft: theme.SIZES.BASE,
+		marginBottom: theme.SIZES.BASE,
 	},
 	rating: {
 		marginHorizontal: 0,
@@ -256,6 +443,12 @@ const styles = StyleSheet.create({
 		shadowRadius: 3,
 		shadowOpacity: 0.2,
 		elevation: 3,
+	},
+	inputBox: {
+		width: width + 2,
+		borderTopColor: argonTheme.COLORS.BLOCK,
+		borderWidth: 1,
+		backgroundColor: theme.COLORS.WHITE,
 	},
 });
 

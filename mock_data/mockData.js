@@ -8,6 +8,7 @@ export const users = {
 		avatar: "https://i.ibb.co/b755bN5/avatar2.png",
 		uw: true,
 		rating: 5.0,
+		paymentOptions:["PayPal", "Venmo", "WeChat", "Zelle"],
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001"],
 	},
@@ -18,6 +19,7 @@ export const users = {
 		avatar: "https://i.ibb.co/3R6Y3pb/avatar1.png",
 		uw: true,
 		rating: 5.0,
+		paymentOptions:["Venmo", "Zelle"],
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001, i00002"],
 	},
@@ -28,6 +30,7 @@ export const users = {
 		avatar: "https://i.ibb.co/JKPPkcv/avatar3.png",
 		uw: false,
 		rating: 4.5730,
+		paymentOptions:["PayPal", "Venmo"],
 		interests: ["Fashion", "Sports"],
 		likedItems: ["i00003, i00009"],
 	},
@@ -40,31 +43,43 @@ export const conversations = {
 		createdAt: "2021-04-23T18:25:43.511Z",
 		updatedAt: "2021-04-23T18:45:43.511Z",
 		itemId: "i00001",
+		tradeEnded: true,
 		messages: [
 			{
-				time: "2021-04-23T18:25:43.511Z",   
+				time: "2021-04-23T18:25:43.511Z", 
+				contentType: "text",  
 				content: "Hello Joy, I am very interested in the chair, what is a good time to pick this up?",
 				userId: "u00002",
 			},
 			{
 				time: "2021-04-23T18:45:43.511Z",
+				contentType: "text",  
 				content: "Hello David, I am free all week. When do you prefer?",
 				userId: "u00001",
 			},
 			{
 				time: "2021-04-23T18:55:43.511Z",   // ISO Dates
+				contentType: "text",  
 				content: "Great, can I pick it up at Red Square at 2PM tomorrow?",
 				userId: "u00002",
 			},
 			{
 				time: "2021-04-23T19:00:43.511Z",   // ISO Dates
+				contentType: "text",  
 				content: "No problem.",
 				userId: "u00001",
 			},
 			{
 				time: "2021-04-23T19:05:43.511Z",   // ISO Dates
+				contentType: "text",  
 				content: "The chair is really nice, thank you.",
 				userId: "u00002",
+			},
+			{
+				time: "2021-04-23T19:00:43.511Z",   // ISO Dates
+				contentType: "paymentInfo",  
+				content: "Venmo",
+				userId: "u00001",
 			},
 		],
 	},
@@ -74,20 +89,36 @@ export const conversations = {
 		createdAt: "2021-04-23T18:25:43.511Z",
 		updatedAt: "2021-04-23T18:45:43.511Z",
 		itemId: "i00009",
+		tradeEnded: true,
 		messages: [
 			{
 				time: "2021-04-23T18:25:43.511Z",   // ISO Dates
+				contentType: "text",  
 				content: "Hi Josh, I like this yoga mat a lot, what brand is it?",
 				userId: "u00001",
 			},
 			{
 				time: "2021-04-23T18:45:43.511Z",
+				contentType: "text",  
 				content: "Hello Joy, it's a Gaiam yoga mat.",
 				userId: "u00003",
 			},
 			{
 				time: "2021-04-23T18:45:43.511Z",
+				contentType: "text",  
 				content: "Great, see you at Red Square.",
+				userId: "u00001",
+			},
+			{
+				time: "2021-04-23T18:55:43.511Z",
+				contentType: "paymentInfo",  
+				content: "PayPal",
+				userId: "u00003",
+			},
+			{
+				time: "2021-04-23T18:56:43.511Z",
+				contentType: "text",  
+				content: "Thank you! Love the yoga mat",
 				userId: "u00001",
 			},
 		],
