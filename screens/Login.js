@@ -3,16 +3,13 @@ import { SafeAreaView, Text } from "react-native";
 import { Block, theme } from "galio-framework";
 import { TextInput } from "react-native-gesture-handler";
 import { Theme } from "../components";
-import {
-  auth,
-  signInWithEmailAndPassword,
-  signInWithGoogle,
-} from "../firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
+
 
 import { Icon, Input } from "../components/";
 import { argonTheme, tabs } from "../constants/";
 import { StyleSheet, View, Button, Alert } from "react-native";
+
+
 
 const Login = ({ navigation }) => {
   return (
@@ -62,7 +59,7 @@ const Login = ({ navigation }) => {
       <Button
         title="Sign in"
         onPress={() => navigation.navigate("App")}
-      ></Button>
+      ></Button>*/
     </View>
   );
 };
