@@ -102,6 +102,10 @@ class Header extends React.Component {
 						navigation={navigation}
 					/>,
 				];
+			
+			case "Saved":
+				return; 
+
 			case "Categories":
 				return [
 					<ChatButton
@@ -186,14 +190,24 @@ class Header extends React.Component {
 				break;
 		}
 	};
+
 	renderSearch = () => {
+		const {title} = this.props
+		const searchPlaceHolder = () => {
+			if(title=="Message Center"){
+				return "Search for chat history";
+			}
+			else{
+				return "What are you looking for?";
+			}
+		};
 		const { navigation } = this.props;
 		return (
 			<Input
 				right
 				color="black"
 				style={styles.search}
-				placeholder="What are you looking for?"
+				placeholder={searchPlaceHolder()}
 				placeholderTextColor={"#8898AA"}
 				onFocus={() => navigation.navigate("Pro")}
 				iconContent={
@@ -306,10 +320,8 @@ class Header extends React.Component {
 			bgColor && { backgroundColor: bgColor },
 		];
 
-		const mainPages = ["Home", "Saved"];
-		const mainPage = mainPages.includes(title);
 		const navbar = () => {
-			if (mainPage) {
+			if (title=="Home") {
 				return (
 					<Block style={{paddingVertical: theme.SIZES.BASE * 1.5}} />
 

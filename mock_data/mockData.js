@@ -2,58 +2,142 @@ import useWindowDimensions from "react-native/Libraries/Utilities/useWindowDimen
 
 export const users = {
 	u00001: {
-		userId: "12345",
+		userId: "u00001",
 		email: "12345@uw.edu",
-		firstName: "Bob",
-		lastName: "Ross",
-		uw_authentication: true,
+		userName: "Joy",
+		avatar: "https://i.ibb.co/b755bN5/avatar2.png",
+		uw: true,
+		rating: 5.0,
+		paymentOptions:["PayPal", "Venmo", "WeChat", "Zelle"],
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001"],
 	},
 	u00002: {
-		userId: "98765",
+		userId: "u00002",
 		email: "9876@uw.edu",
-		firstName: "Cristiano",
-		lastName: "Ronaldo",
-		uw_authentication: true,
+		userName: "David",
+		avatar: "https://i.ibb.co/3R6Y3pb/avatar1.png",
+		uw: true,
+		rating: 5.0,
+		paymentOptions:["Venmo", "Zelle"],
 		interests: ["Furniture", "Electronics"],
 		likedItems: ["i00001, i00002"],
 	},
+	u00003: {
+		userId: "u00003",
+		email: "23456@uw.edu",
+		userName: "Josh",
+		avatar: "https://i.ibb.co/JKPPkcv/avatar3.png",
+		uw: false,
+		rating: 4.5730,
+		paymentOptions:["PayPal", "Venmo"],
+		interests: ["Fashion", "Sports"],
+		likedItems: ["i00003, i00009"],
+	},
 };
 
-export const conversation = {
+export const conversations = {
 	101010: {
 		conversationId: "101010",
-		participants: ["12345", "98765"],
+		participants: ["u00001", "u00002"],
 		createdAt: "2021-04-23T18:25:43.511Z",
 		updatedAt: "2021-04-23T18:45:43.511Z",
-		objectId: "i00001",
-		messages: {
-			"2021-04-23T18:25:43.511Z": {
-				content: "Hello Cris",
-				userId: "u00001",
-			},
-			"2021-04-23T18:45:43.511Z": {
-				content: "Hello Bob",
+		itemId: "i00001",
+		tradeEnded: true,
+		messages: [
+			{
+				time: "2021-04-23T18:25:43.511Z", 
+				contentType: "text",  
+				content: "Hello Joy, I am very interested in the chair, what is a good time to pick this up?",
 				userId: "u00002",
 			},
-		},
+			{
+				time: "2021-04-23T18:45:43.511Z",
+				contentType: "text",  
+				content: "Hello David, I am free all week. When do you prefer?",
+				userId: "u00001",
+			},
+			{
+				time: "2021-04-23T18:55:43.511Z",   // ISO Dates
+				contentType: "text",  
+				content: "Great, can I pick it up at Red Square at 2PM tomorrow?",
+				userId: "u00002",
+			},
+			{
+				time: "2021-04-23T19:00:43.511Z",   // ISO Dates
+				contentType: "text",  
+				content: "No problem.",
+				userId: "u00001",
+			},
+			{
+				time: "2021-04-23T19:05:43.511Z",   // ISO Dates
+				contentType: "text",  
+				content: "The chair is really nice, thank you.",
+				userId: "u00002",
+			},
+			{
+				time: "2021-04-23T19:00:43.511Z",   // ISO Dates
+				contentType: "paymentInfo",  
+				content: "Venmo",
+				userId: "u00001",
+			},
+		],
+	},
+	101011: {
+		conversationId: "101011",
+		participants: ["u00001", "u00003"],
+		createdAt: "2021-04-23T18:25:43.511Z",
+		updatedAt: "2021-04-23T18:45:43.511Z",
+		itemId: "i00009",
+		tradeEnded: true,
+		messages: [
+			{
+				time: "2021-04-23T18:25:43.511Z",   // ISO Dates
+				contentType: "text",  
+				content: "Hi Josh, I like this yoga mat a lot, what brand is it?",
+				userId: "u00001",
+			},
+			{
+				time: "2021-04-23T18:45:43.511Z",
+				contentType: "text",  
+				content: "Hello Joy, it's a Gaiam yoga mat.",
+				userId: "u00003",
+			},
+			{
+				time: "2021-04-23T18:45:43.511Z",
+				contentType: "text",  
+				content: "Great, see you at Red Square.",
+				userId: "u00001",
+			},
+			{
+				time: "2021-04-23T18:55:43.511Z",
+				contentType: "paymentInfo",  
+				content: "PayPal",
+				userId: "u00003",
+			},
+			{
+				time: "2021-04-23T18:56:43.511Z",
+				contentType: "text",  
+				content: "Thank you! Love the yoga mat",
+				userId: "u00001",
+			},
+		],
 	},
 };
 
 export const items = {
 	i00001: {
 		itemId: "i00001",
-		title: "Black IKEA chair adafds",
+		title: "Black IKEA chair",
 		sellerId: "u00001",
 		condition: "Brand New",
 		description:
-			"Black IKEA chair in good condition, used for a year. Afakldfjakldfjakldfjakldfjlkadjfladjf;adfjladfj",
+			"Black IKEA chair in good condition, used for a year. I am graudating from UW and moving out. You can pick this up at anytime in the day.",
 		images: [
 			"https://images.unsplash.com/photo-1581539250439-c96689b516dd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80",
 			"https://images.unsplash.com/photo-1592078615290-033ee584e267?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
 		],
-		price: 25.05,
+		price: 25,
 		pickUpLocation: "Red Square",
 		dropOff: "False",
 		UWvisibility: "True",

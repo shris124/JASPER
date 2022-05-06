@@ -13,13 +13,14 @@ import articles from "../constants/articles";
 import { items, users, conversations } from "../mock_data/mockData";
 import { argonTheme, Images } from "../constants";
 import StarRating from "react-native-star-rating";
+
 const { width } = Dimensions.get("screen");
 
 // Set to constant for presentation
 const conversationList = Object.keys(conversations).map(
 	(key) => conversations[key]
 );
-const conversation = conversationList[0];
+const conversation = conversationList[1];
 const itemData = items[conversation.itemId];
 const userId = users.u00001.userId;
 const userData = users[userId];
@@ -28,7 +29,7 @@ const subjectId =
 		? conversation.participants[1]
 		: conversation.participants[0];
 const subjectData = users[subjectId];
-const userRole = subjectId == "u00002" ? "seller" : "buyer";
+const userRole = subjectId === "u00002" ? "seller" : "buyer";
 
 const renderMessages = () => {
 	const messages = conversation.messages;
@@ -325,9 +326,8 @@ const userInputBar = () => {
 	);
 };
 
-const Chat = (props) => {
+const Chat2 = (props) => {
 	const [rating, setRating] = React.useState(0.0);
-
 	const { navigation } = props;
 	return (
 		<Block flex center style={styles.home}>
@@ -337,8 +337,8 @@ const Chat = (props) => {
 				style={{ overflow: "visible" }}
 			>
 				<Block flex>
-					{/* <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-						<TouchableOpacity
+					<Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+						{/* <TouchableOpacity
 							onPress={() =>
 								navigation.navigate("Message Center")
 							}
@@ -356,20 +356,16 @@ const Chat = (props) => {
 									style={styles.thumb}
 								/>
 							</Block>
-						</TouchableOpacity>
-					</Block> */}
+						</TouchableOpacity> */}
+					</Block>
 					<Block style={{ marginVertical: 10 }}>
 						{renderMessages()}
 					</Block>
 
 					{/* {userRole == "buyer" && (
-						<Block
-							style={{
-								borderWidth: 10,
-								backgroundColor: argonTheme.COLORS.WARNING,
-							}}
-						>
+						<Block center>
 							<Button
+								onPress={() => handlePayment()}
 								style={styles.button}
 								textStyle={{ fontSize: 15, fontWeight: "600" }}
 							>
@@ -448,8 +444,7 @@ const styles = StyleSheet.create({
 		width: width + 2,
 		borderTopColor: argonTheme.COLORS.BLOCK,
 		borderWidth: 1,
-		backgroundColor: theme.COLORS.WHITE,
 	},
 });
 
-export default Chat;
+export default Chat2;

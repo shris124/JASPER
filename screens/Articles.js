@@ -10,6 +10,7 @@ import {
 } from "react-native";
 //argon
 import { Images, argonTheme, articles } from "../constants/";
+import { items } from "../mock_data/mockData";
 
 import { Card } from "../components/";
 import React from "react";
@@ -88,15 +89,15 @@ class Articles extends React.Component {
 				</Text>
 				<Block flex>
 					<Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-						<Card item={articles[0]} horizontal />
+						<Card item={items.i00001} horizontal />
 						<Block flex row>
 							<Card
-								item={articles[1]}
+								item={items.i00002}
 								style={{ marginRight: theme.SIZES.BASE }}
 							/>
-							<Card item={articles[2]} />
+							<Card item={items.i00003} />
 						</Block>
-						<Card item={articles[4]} full />
+						<Card item={items.i00004} full />
 						<Block flex card shadow style={styles.category}>
 							<ImageBackground
 								source={{

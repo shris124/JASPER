@@ -24,6 +24,7 @@ const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
 
 class Detail extends React.Component {
+
 	renderImage = (imgUri) => {
 		const { navigation } = this.props;
 
@@ -64,12 +65,13 @@ class Detail extends React.Component {
 	};
 
 	renderCard = (item) => {
-		return <Card item={item} style={styles.similarItems} />;
+		return <Card item={item} style={styles.similarItems} key={"similar" + item.itemId}/>;
 	};
 
 	render() {
 		const item = items.i00001;
 		const similarItems = Object.keys(items).map((key) => items[key]);
+		const sellerData = users[item.sellerId];
 		return (
 			<Block flex center>
 				<ScrollView showsVerticalScrollIndicator={false}>
@@ -102,7 +104,7 @@ class Detail extends React.Component {
 									<Block flex row style={{ top: 15 }}>
 										<Image
 											source={{
-												uri: Images.ProfilePicture,
+												uri: sellerData.avatar,
 											}}
 											style={styles.avatar}
 										/>
@@ -111,11 +113,11 @@ class Detail extends React.Component {
 												size={14}
 												style={styles.userName}
 											>
-												Jessica
+												{sellerData.userName}
 											</Text>
 											<StarRating
 												disabled
-												rating={4}
+												rating={sellerData.rating}
 												starSize={18}
 												starStyle={styles.stars}
 												fullStarColor={"#FDCC0D"}
@@ -225,7 +227,7 @@ class Detail extends React.Component {
 									style={styles.button}
 									textStyle={{ fontSize: 20 }}
 								>
-									{"Chat with " + item.sellerId}
+									{"Chat with " + sellerData.userName}
 								</Button>
 							</Block>
 							<Block style={styles.descriptionBox}>
@@ -294,6 +296,7 @@ const styles = StyleSheet.create({
 		marginBottom: theme.SIZES.BASE,
 		width: width - theme.SIZES.BASE * 2,
 		height: theme.SIZES.BASE * 3,
+		borderRadius: 30
 	},
 	category: {
 		backgroundColor: theme.COLORS.WHITE,
@@ -351,8 +354,10 @@ const styles = StyleSheet.create({
 		// elevation: 3,
 	},
 	userName: {
-		top: 20,
+		top: 15,
 		left: 5,
+		fontWeight: "600",
+		fontSize: 15
 	},
 	stars: {
 		top: 20,

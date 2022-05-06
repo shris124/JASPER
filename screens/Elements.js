@@ -192,6 +192,7 @@ class Elements extends React.Component {
                 family="ArgonExtra"
               />
             }
+            style={{width: 20}}
           />
         </Block>
         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>

@@ -9,7 +9,7 @@ import { argonTheme } from "../constants";
 
 class ArInput extends React.Component {
   render() {
-    const { shadowless, success, error } = this.props;
+    const { shadowless, success, error, } = this.props;
 
     const inputStyles = [
       styles.input,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: argonTheme.COLORS.BORDER,
     height: 44,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   success: {
     borderColor: argonTheme.COLORS.INPUT_SUCCESS,

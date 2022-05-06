@@ -3,7 +3,7 @@ export default {
     DEFAULT: '#172B4D',
     PRIMARY: '#6314AB',
     SECONDARY: '#8656AF',
-    LABEL: '#FE2472',
+    LABEL: '#E4D3F4',
     INFO: '#11CDEF',
     ERROR: '#F5365C',
     SUCCESS: '#2DCE89',
