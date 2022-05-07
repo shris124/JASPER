@@ -33,7 +33,7 @@ const renderConversation = (conversation, navigation) => {
 		latestMessage.content :
 			"[" + latestMessage.contentType.charAt(0).toUpperCase() + latestMessage.contentType.slice(1) + "]";
 		if (content.length > 20) {
-			return content.slice(0, 20) + "...";
+			return content.slice(0, 23) + "...";
 		} else {
 			return content;
 		}

@@ -38,6 +38,7 @@ const Post = (props) => {
 	const [imgUris, setImgUris] = React.useState([]);
 	const iconSize = 25;
 	const iconBoxSize = 20;
+	const {navigation} = props;
 	const handleChoosePhoto = async () => {
 		// console.warn("Choosing Photo");
 		const options = {
@@ -345,8 +346,9 @@ const Post = (props) => {
 					</Block>
 					<Block flex center style={{ marginBottom: 50 }}>
 						<Button
-							textStyle={{ fontSize: 20, fontWeight: "600" }}
+							textStyle={{ fontSize: 15, fontWeight: "600" }}
 							style={{ width: width - theme.SIZES.BASE * 2, borderRadius: 30 }}
+							onPress={() => navigation.navigate("PostDone")}
 						>
 							Post Item
 						</Button>

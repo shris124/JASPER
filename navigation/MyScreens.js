@@ -32,6 +32,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import MessageCenter from "../screens/MessageCenter";
 import Chat from "../screens/Chat";
 import Chat2 from "../screens/Chat2";
+import PostDone from "../screens/PostDone";
 
 const { width } = Dimensions.get("screen");
 
@@ -239,13 +240,12 @@ function PostStack(props) {
 				}}
 			/>
 			<Stack.Screen
-				name="Pro"
-				component={Pro}
+				name="PostDone"
+				component={PostDone}
 				options={{
 					header: ({ navigation, scene }) => (
 						<Header
-							title=""
-							back
+							title="Post Done"
 							white
 							transparent
 							navigation={navigation}
@@ -253,6 +253,7 @@ function PostStack(props) {
 						/>
 					),
 					headerTransparent: true,
+          headerShown: false
 				}}
 			/>
 		</Stack.Navigator>
