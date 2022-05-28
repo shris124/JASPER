@@ -1,29 +1,36 @@
 {
   "expo": {
-    "name": "Argon FREE React Native",
-    "slug": "argon-free-react-native",
-    "privacy": "public",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "1.7.1",
+    "name": "Jasper",
+    "slug": "Jasper",
+    "icon":"./assets/imgs/icon.png",
+    "version": "1.0.0",
+    "scheme": "uwjasper",
     "orientation": "portrait",
-    "icon": "./assets/imgs/icon.png",
-    "splash": {
-      "image": "./assets/imgs/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+    "ios": {
+      "bundleIdentifier": "com.uwinfo.jasper",
+      "buildNumber": "1.0.0"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
+    "android": {
+      "package": "com.uwinfo.jasper",
+      "versionCode": 1
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "description": "Argon React Native, based on Argon Design System. Coded by Creative Tim"
+    ], 
+    "web": {
+      "config": {
+        "firebase": {
+          "apiKey": "AIzaSyDoO-15TP38J4Gzz4BlI3rFucgYkymFs04",
+          "authDomain": "uwjasper.firebaseapp.com",
+          "databaseURL": "https://uwjasper-default-rtdb.firebaseio.com",
+          "projectId": "uwjasper",
+          "storageBucket": "uwjasper.appspot.com",
+          "messagingSenderId": "393140379927",
+          "appId": "1:393140379927:web:09b62a59258415ffcad752",
+          "measurementId": "G-VQBW4GV8Z1"
+        }
+      }
+    }
+    
   }
 }

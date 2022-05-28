@@ -1,59 +1,209 @@
-import React from "react";
+import { useEffect, useState } from "react";
 
 //galio
 import { Block, Text, theme } from "galio-framework";
 import {
 	Dimensions,
 	Image,
-	ImageBackground,
 	View,
 	ScrollView,
 	StyleSheet,
-	TouchableWithoutFeedback,
 	TextInput,
 } from "react-native";
-//argon
-import { Images, argonTheme, articles } from "../constants/";
 
 // Components & Constants
 import { Button, Icon, Input, Switch } from "../components/";
-import { items } from "../mock_data/mockData";
+import { Theme } from "../constants/";
+import { items } from "../constants/mockData";
 import Tabs from "../components/Tabs";
 import tabs from "../constants/tabs";
+
+// Database
+// import {
+// 	ref as storageRef,
+// 	getStorage,
+// 	uploadBytes,
+// 	getDownloadURL,
+// } from "firebase/storage";
+import {
+	ref as dbRef,
+	getDatabase,
+	push as firebasePush,
+	get as firebaseGet,
+	set as firebaseSet,
+} from "firebase/database";
+
+import {
+	getDownloadURL,
+	getStorage,
+	ref as storageRef,
+	uploadBytes,
+} from "firebase/storage";
 
 // Libraries
 import * as ImagePicker from "expo-image-picker";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { async } from "@firebase/util";
 
 const { width } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
 
-const Post = (props) => {
-	const [negotiableSwitch, setNegotiableSwitch] = React.useState(false);
-	const [dropOffSwitch, setDropOffSwitch] = React.useState(false);
-	const [UWVisibleSwitch, setUWVisibleSwitch] = React.useState(false);
-	const [descriptionInput, setDescriptionInput] = React.useState("");
-	const [imgUris, setImgUris] = React.useState([]);
+function Post({ route, navigation }) {
+	const { userId } = route.params;
+
+	// const [title, setTitle] = useState("");
+	// const [description, setDescription] = useState("");
+	// const [price, setPrice] = useState(0);
+	// const [mediaData, setMediaData] = useState([]);
+	// const [category, setCategory] = useState(tabs.categories[0].id);
+	// const [condition, setCondition] = useState(tabs.conditions[0].id);
+	// const [location, setLocation] = useState(tabs.pickUpLocations[0].id);
+	// const [negotiableSwitch, setNegotiableSwitch] = useState(false);
+	// const [dropOffSwitch, setDropOffSwitch] = useState(false);
+	// const [UWVisibleSwitch, setUWVisibleSwitch] = useState(false);
+	const [title, setTitle] = useState("Study Lamp");
+	const [description, setDescription] = useState("Adjustable study lamp, 3 lighting mode. Good for studying and reading.");
+	const [price, setPrice] = useState("25");
+	const [mediaData, setMediaData] = useState([]);
+	const [category, setCategory] = useState(tabs.categories[0].id);
+	const [condition, setCondition] = useState(tabs.conditions[0].id);
+	const [location, setLocation] = useState(tabs.pickUpLocations[0].id);
+	const [negotiableSwitch, setNegotiableSwitch] = useState(false);
+	const [dropOffSwitch, setDropOffSwitch] = useState(false);
+	const [UWVisibleSwitch, setUWVisibleSwitch] = useState(false);
 	const iconSize = 25;
 	const iconBoxSize = 20;
-	const {navigation} = props;
-	const handleChoosePhoto = async () => {
-		// console.warn("Choosing Photo");
+
+	const toggleSwitch = (switchName) => {
+		switch (switchName) {
+			case "dropOff":
+				setDropOffSwitch(!dropOffSwitch);
+				break;
+			case "negotiable":
+				setNegotiableSwitch(!negotiableSwitch);
+				break;
+			case "uw":
+				setUWVisibleSwitch(!UWVisibleSwitch);
+				break;
+			default:
+				break;
+		}
+	};
+
+	const handleChooseImage = async () => {
 		const options = {
 			maxWidth: 300,
 			maxHeight: 300,
 			mediaType: "photo",
-		};
-		const result = await ImagePicker.launchImageLibraryAsync({
-			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			base64: true,
+			mediaTypes: ImagePicker.MediaTypeOptions.Images,
 			allowsEditing: true,
 			aspect: [4, 3],
-			quality: 1,
-		});
+			quality: 0,
+		};
+		const result = await ImagePicker.launchImageLibraryAsync(options);
 
-		setImgUris(imgUris.concat([result.uri]));
+		if (result.uri) {
+			setMediaData(
+				mediaData.concat([
+					{
+						uri: result.uri,
+						data: "data:image/jpeg;base64," + result.base64,
+					},
+				])
+			);
+		}
+	};
+
+	const handleDeletePhoto = (idx) => {
+		let newMediaData = [...mediaData].filter((element, i) => i !== idx);
+		setMediaData(newMediaData);
+	};
+
+	const checkCompletion = () => {
+		if (title !== "" && description !== "" && price !== "") {
+			return true;
+		} else {
+			return false;
+		}
+	};
+
+	const handleSubmit = async () => {
+		if (checkCompletion()) {
+			let today = new Date(Date.now());
+			let newItem = {
+				itemId: "",
+				sellerId: userId,
+				createDate: today.toISOString().slice(0, -14),
+				condition: condition,
+				category: category,
+				title: title,
+				description: description,
+				images: mediaData[0].data,
+				price: price,
+				pickUpLocation: location,
+				dropOff: dropOffSwitch,
+				UWvisibility: UWVisibleSwitch,
+				negotiable: negotiableSwitch,
+			};
+
+			const db = getDatabase();
+			const allItemsRef = dbRef(db, "allItems");
+			const itemId = firebasePush(allItemsRef, newItem).key;
+
+			// The following code stores data at firebase storage
+			// ****************************************************
+			const storage = getStorage();
+			const remoteUrls = await Promise.all(
+				mediaData.map(async (data) => {
+					const uriSplit = data.uri.split("/");
+					const imgName = uriSplit[uriSplit.length - 1];
+					const itemImgRef = storageRef(
+						storage,
+						"itemImages/" + itemId + "/" + imgName
+					);
+					const response = await fetch(data.uri);
+					const blob = await response.blob();
+					await uploadBytes(itemImgRef, blob).catch((error) => {
+						console.warn(error);
+					});
+					const remoteUrl = await getDownloadURL(itemImgRef);
+					return remoteUrl;
+				})
+			).catch((error) => {
+				console.warn(error);
+			});
+
+			// Update item info
+			newItem.images = remoteUrls;
+			// ****************************************************
+			newItem.itemId = itemId;
+			const itemRef = dbRef(db, "allItems/" + itemId);
+			firebaseSet(itemRef, newItem);
+
+			const userRef = dbRef(db, "users/" + userId);
+			firebaseGet(userRef).then((snapshot) => {
+				if (snapshot.exists()) {
+					let newUserData = snapshot.val();
+					const newPostedItems = [...newUserData.postedItems, itemId];
+					newUserData.postedItems = newPostedItems;
+					firebaseSet(userRef, newUserData);
+				}
+			});
+			setTitle("");
+			setDescription("");
+			setPrice(0);
+			setMediaData([]);
+			setNegotiableSwitch(false);
+			setDropOffSwitch(false);
+			setUWVisibleSwitch(false);
+			navigation.navigate("PostDone");
+		} else {
+			// Temp
+			alert("Information incomplete");
+		}
 	};
 
 	const categoryTabs = () => {
@@ -63,7 +213,7 @@ const Post = (props) => {
 				<Tabs
 					data={tabs.categories || []}
 					initialIndex={defaultTab}
-					// onChange={(id) => navigation.setParams({ tabId: id })}
+					onChange={(id) => setCategory(id)}
 				/>
 			</Block>
 		);
@@ -76,7 +226,7 @@ const Post = (props) => {
 				<Tabs
 					data={tabs.conditions || []}
 					initialIndex={defaultTab}
-					// onChange={(id) => navigation.setParams({ tabId: id })}
+					onChange={(id) => setCondition(id)}
 				/>
 			</Block>
 		);
@@ -90,11 +240,12 @@ const Post = (props) => {
 				<Tabs
 					data={tabs.pickUpLocations || []}
 					initialIndex={defaultTab}
-					// onChange={(id) => navigation.setParams({ tabId: id })}
+					onChange={(id) => setLocation(id)}
 				/>
 			</Block>
 		);
 	};
+
 	return (
 		<Block flex>
 			<ScrollView showsVerticalScrollIndicator={false}>
@@ -106,25 +257,29 @@ const Post = (props) => {
 								placeholder="Name of your item"
 								iconContent={<Block />}
 								style={{ marginBottom: 10 }}
+								value={title}
+								onChangeText={(text) => setTitle(text)}
 							/>
 						</Block>
 						<Block>
 							<Text style={styles.title}>Add Description</Text>
-							<TextInput
-								style={[styles.textInput, styles.shadow]}
-								placeholder="    Describe your item "
-								multiline={true}
-								numberOfLines={6}
-								maxLength={500}
-								onChangeText={(text) =>
-									setDescriptionInput(text)
-								}
-								value={descriptionInput}
-							></TextInput>
+							<Block style={[styles.textInput, styles.shadow]}>
+								<TextInput
+									style={{ color: Theme.COLORS.HEADER }}
+									placeholder="Describe your item "
+									multiline={true}
+									numberOfLines={6}
+									maxLength={500}
+									onChangeText={(text) =>
+										setDescription(text)
+									}
+									value={description}
+								></TextInput>
+							</Block>
 						</Block>
 						<Block style={styles.photoButton}>
 							<Text style={styles.title}>Photos</Text>
-							<Button onPress={() => handleChoosePhoto()}>
+							<Button onPress={() => handleChooseImage()}>
 								Choose Photo
 							</Button>
 							<ScrollView
@@ -141,15 +296,15 @@ const Post = (props) => {
 									paddingHorizontal: theme.SIZES.BASE / 2,
 								}}
 							>
-								{imgUris.map((imgUri) => (
+								{mediaData.map((data, idx) => (
 									<Block
 										flex
 										row
 										style={{ marginTop: 30 }}
-										key={imgUri}
+										key={data.uri}
 									>
 										<Image
-											source={{ uri: imgUri }}
+											source={{ uri: data.uri }}
 											style={{
 												width: 130,
 												height: 130,
@@ -158,23 +313,24 @@ const Post = (props) => {
 												borderRadius: 15,
 											}}
 										/>
-										<TouchableOpacity
-											onPress={() =>
-												console.warn("Delete Image")
-											}
+										<Button
+											onlyIcon
+											icon="closecircleo"
+											iconFamily="AntDesign"
+											iconSize={30}
+											iconColor={Theme.COLORS.ERROR}
+											color={Theme.COLORS.WHITE}
 											style={{
 												position: "absolute",
-												right: 5,
-												bottom: 110,
+												right: 110,
+												bottom: 95,
+												width: 40,
+												height: 40,
 											}}
-										>
-											<Icon
-												name="closecircleo"
-												family="AntDesign"
-												size={30}
-												color={argonTheme.COLORS.ERROR}
-											></Icon>
-										</TouchableOpacity>
+											onPress={() => {
+												handleDeletePhoto(idx);
+											}}
+										/>
 									</Block>
 								))}
 							</ScrollView>
@@ -260,12 +416,14 @@ const Post = (props) => {
 										name="dollar"
 										family="Foundation"
 										size={iconSize}
-										color={argonTheme.COLORS.GRAY}
+										color={Theme.COLORS.GRAY}
 									/>
 								}
 								style={{ width: 100 }}
 								fontSize={15}
 								fontWeight={"600"}
+								value={price}
+								onChangeText={(text) => setPrice(text)}
 							/>
 						</Block>
 						<Block
@@ -289,7 +447,7 @@ const Post = (props) => {
 							</Block>
 							<Switch
 								value={negotiableSwitch}
-								onValueChange={() => setNegotiableSwitch(true)}
+								onValueChange={() => toggleSwitch("negotiable")}
 							/>
 						</Block>
 
@@ -314,7 +472,7 @@ const Post = (props) => {
 							</Block>
 							<Switch
 								value={dropOffSwitch}
-								onValueChange={() => setDropOffSwitch(true)}
+								onValueChange={() => toggleSwitch("dropOff")}
 							/>
 						</Block>
 						<Block
@@ -340,15 +498,18 @@ const Post = (props) => {
 							</Block>
 							<Switch
 								value={UWVisibleSwitch}
-								onValueChange={() => setUWVisibleSwitch(true)}
+								onValueChange={() => toggleSwitch("uw")}
 							/>
 						</Block>
 					</Block>
 					<Block flex center style={{ marginBottom: 50 }}>
 						<Button
 							textStyle={{ fontSize: 15, fontWeight: "600" }}
-							style={{ width: width - theme.SIZES.BASE * 2, borderRadius: 30 }}
-							onPress={() => navigation.navigate("PostDone")}
+							style={{
+								width: width - theme.SIZES.BASE * 2,
+								borderRadius: 30,
+							}}
+							onPress={() => handleSubmit()}
 						>
 							Post Item
 						</Button>
@@ -357,13 +518,13 @@ const Post = (props) => {
 			</ScrollView>
 		</Block>
 	);
-};
+}
 
 const styles = StyleSheet.create({
 	title: {
 		fontWeight: "600",
 		fontSize: 18,
-		color: argonTheme.COLORS.HEADER,
+		color: Theme.COLORS.HEADER,
 	},
 	group: {
 		paddingTop: theme.SIZES.BASE,
@@ -426,15 +587,16 @@ const styles = StyleSheet.create({
 	},
 	textInput: {
 		fontSize: 15,
-		color: argonTheme.COLORS.HEADER,
+		color: Theme.COLORS.HEADER,
 		marginVertical: theme.SIZES.BASE / 2,
 		backgroundColor: theme.COLORS.WHITE,
 		borderRadius: 4,
-		borderColor: argonTheme.COLORS.BORDER,
+		borderColor: Theme.COLORS.BORDER,
 		height: 100,
+		paddingHorizontal: 15,
 	},
 	shadow: {
-		shadowColor: argonTheme.COLORS.BLACK,
+		shadowColor: Theme.COLORS.BLACK,
 		shadowOffset: { width: 0, height: 1 },
 		shadowRadius: 2,
 		shadowOpacity: 0.2,

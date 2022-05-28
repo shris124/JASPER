@@ -1,19 +1,16 @@
 import React from "react";
-import { Dimensions, SafeAreaView, Text } from "react-native";
+import { Dimensions, Text } from "react-native";
 import { Block, theme } from "galio-framework";
-import { TextInput } from "react-native-gesture-handler";
-import { Theme } from "../components";
 //import { ShoppingHome } from "../assets/imgs";
 import {
 	auth,
 	signInWithEmailAndPassword,
 	signInWithGoogle,
 } from "../firebase.js";
-import { useAuthState } from "react-firebase-hooks/auth";
 
-import { Icon, Input, Button } from "../components/";
-import { argonTheme, tabs } from "../constants/";
-import { StyleSheet, Alert, Image } from "react-native";
+import { Button } from "../components/";
+import { Theme } from "../constants/";
+import { StyleSheet, Image } from "react-native";
 
 const { width } = Dimensions.get("screen");
 
@@ -32,10 +29,29 @@ const PostDone = ({ navigation }) => {
 			<Text style={styles.subtitle}>Let's explore some more items!</Text>
 			<Button
 				onPress={() => navigation.navigate("Home")}
-				style={{ width: width - theme.SIZES.BASE * 4, marginTop: 20, justifyContent:'center', alignItems:'center', borderRadius: 30 }}
+				style={{
+					width: width - theme.SIZES.BASE * 4,
+					marginTop: 20,
+					justifyContent: "center",
+					alignItems: "center",
+					borderRadius: 30,
+				}}
 				textStyle={{ fontSize: 15, fontWeight: "600" }}
 			>
 				Back to Home
+			</Button>
+			<Button
+				onPress={() => navigation.goBack()}
+				style={{
+					width: width - theme.SIZES.BASE * 4,
+					marginTop: 20,
+					justifyContent: "center",
+					alignItems: "center",
+					borderRadius: 30,
+				}}
+				textStyle={{ fontSize: 15, fontWeight: "600" }}
+			>
+				Make Another Post
 			</Button>
 		</Block>
 	);
@@ -63,14 +79,14 @@ const styles = StyleSheet.create({
 	subtitle: {
 		fontSize: 25,
 		paddingBottom: 30,
-		color: argonTheme.COLORS.GRAY
+		color: Theme.COLORS.GRAY,
 	},
 	signInButton: {
 		paddingTop: 10,
 	},
 	greyButtons: {
 		paddingTop: 15,
-		alignItems: 'center'
+		alignItems: "center",
 	},
 });
 

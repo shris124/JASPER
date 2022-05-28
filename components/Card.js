@@ -1,6 +1,5 @@
-import React from "react";
+import { useState } from "react";
 import { withNavigation } from "@react-navigation/compat";
-import PropTypes from "prop-types";
 import {
 	StyleSheet,
 	Dimensions,
@@ -9,92 +8,103 @@ import {
 } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 
-import { argonTheme } from "../constants";
+import { getDatabase, set as firebaseSet, get as firebaseGet, ref as dbRef } from "firebase/database";
+
+import { Theme } from "../constants";
 import { Button } from ".";
 
-class Card extends React.Component {
-	render() {
-		const {
-			navigation,
-			item,
-			horizontal,
-			full,
-			style,
-			priceColor,
-			imageStyle,
-		} = this.props;
+function Card(props) {
+	const [saved, setSaved] = useState(true);
 
-		const imageStyles = [
-			full ? styles.fullImage : styles.horizontalImage,
-			imageStyle,
-		];
-		const cardContainer = [styles.card, style];
-		const imgContainer = [
-			styles.imageContainer,
-			horizontal ? styles.horizontalStyles : styles.verticalStyles,
-			styles.shadow,
-		];
+	const navigation = props.navigation;
+	const item = props.item;
+	const horizontal = props.horizontal;
+	const full = props.full;
+	const style = props.style;
+	const priceColor = props.priceColor;
+	const imageStyle = props.imageStyle;
 
-		const handleUnlike = () => {
-			console.warn("Unlike");
-		};
-		const UnlikeButton = () => {
-			return (
-				<Button
-					onPress={() => handleUnlike()}
-					onlyIcon
-					color={theme.COLORS.WHITE}
-					icon="heart"
-					iconFamily="AntDesign"
-					iconSize={25}
-					iconColor={argonTheme.COLORS.ERROR}
-					radius={100}
-					style={styles.unlikeButton}
-				/>
-			);
-		};
+	const imageStyles = [
+		full ? styles.fullImage : styles.horizontalImage,
+		imageStyle,
+	];
+	const cardContainer = [styles.card, style];
+	const imgContainer = [
+		styles.imageContainer,
+		horizontal ? styles.horizontalStyles : styles.verticalStyles,
+		styles.shadow,
+	];
+
+	const handleUnlike = () => {
+		if(props.userData){
+			const db = getDatabase();
+			const userRef = dbRef(db, "users/" + props.userData.userId);
+
+			let newUserData = props.userData;
+			if (saved) {
+				newUserData.savedItems = newUserData.savedItems.filter(
+					(savedItemId) => savedItemId != item.itemId
+				);
+			} else {
+				newUserData.savedItems.push(item.itemId);
+			}
+			firebaseSet(userRef, newUserData);
+			setSaved(!saved);
+		}
+	};
+
+	const UnlikeButton = () => {
 		return (
-			<Block row={horizontal} card flex style={cardContainer}>
-				<TouchableWithoutFeedback
-					onPress={() => navigation.navigate("Detail")}
-				>
-					<Block flex style={imgContainer}>
-						<Image
-							source={{ uri: item.images[0] }}
-							style={imageStyles}
-						/>
-					</Block>
-				</TouchableWithoutFeedback>
-				<TouchableWithoutFeedback
-					onPress={() => navigation.navigate("Detail")}
-				>
-					<Block flex style={styles.cardDescription}>
-						<Text size={14} style={styles.cardTitle}>
-							{item.title}
-						</Text>
-						<Text
-							size={14}
-							muted={!priceColor}
-							color={priceColor || argonTheme.COLORS.SECONDARY}
-							bold
-						>
-							{"$" + item.price.toFixed(2)}
-						</Text>
-						{horizontal && UnlikeButton()}
-					</Block>
-				</TouchableWithoutFeedback>
-			</Block>
+			<Button
+				onPress={() => handleUnlike()}
+				onlyIcon
+				color={"transparent"}
+				icon="heart"
+				iconFamily="AntDesign"
+				iconSize={25}
+				iconColor={saved ? Theme.COLORS.ERROR : Theme.COLORS.GRAY}
+				radius={100}
+				style={styles.unlikeButton}
+			/>
 		);
-	}
+	};
+	return (
+		<Block row={horizontal} card flex style={cardContainer}>
+			<TouchableWithoutFeedback
+				onPress={() =>
+					navigation.navigate("Detail", { itemId: item.itemId })
+				}
+			>
+				<Block flex style={imgContainer}>
+					<Image
+						source={{ uri: item.images[0] }}
+						style={imageStyles}
+					/>
+				</Block>
+			</TouchableWithoutFeedback>
+			<TouchableWithoutFeedback
+				onPress={() =>
+					navigation.navigate("Detail", { itemId: item.itemId })
+				}
+			>
+				<Block flex style={styles.cardDescription}>
+					<Text size={14} style={styles.cardTitle}>
+						{item.title}
+					</Text>
+					<Text
+						size={14}
+						muted={!priceColor}
+						color={priceColor || Theme.COLORS.SECONDARY}
+						bold
+					>
+						{"$" + parseFloat(item.price).toFixed(2)}
+					</Text>
+					{horizontal && UnlikeButton()}
+				</Block>
+			</TouchableWithoutFeedback>
+		</Block>
+	);
 }
-
-Card.propTypes = {
-	item: PropTypes.object,
-	horizontal: PropTypes.bool,
-	full: PropTypes.bool,
-	priceColor: PropTypes.string,
-	imageStyle: PropTypes.any,
-};
 
 const styles = StyleSheet.create({
 	card: {

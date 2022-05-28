@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 //galio
 import { Block, Text, theme } from "galio-framework";
 import {
@@ -6,75 +8,111 @@ import {
 	ScrollView,
 	StyleSheet,
 } from "react-native";
+import { getDatabase, ref as dbRef, onValue } from "firebase/database";
 //argon
-import { Images, argonTheme, articles } from "../constants";
-import { items } from "../mock_data/mockData";
+import { Images, Theme } from "../constants";
 
 import { Card } from "../components";
-import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import Loading from "./Loading";
 
 const { width } = Dimensions.get("screen");
 
 const thumbMeasure = (width - 48 - 32) / 3;
 const cardWidth = width - theme.SIZES.BASE * 2;
 
-class Saved extends React.Component {
-	render() {
-		return (
-			<Block flex center>
-				<ScrollView>
-					<Block flex style={styles.group}>
-						<Block flex>
-							<Block
-								style={{ paddingHorizontal: theme.SIZES.BASE }}
-							>
-								<Card item={items.i00001} horizontal />
-								<Card item={items.i00002} horizontal />
-								<Card item={items.i00003} horizontal />
-								<Card item={items.i00004} horizontal />
-								<Card item={items.i00005} horizontal />
-								<Card item={items.i00006} horizontal />
-								<Card item={items.i00007} horizontal />
-								<Card item={items.i00008} horizontal />
-								<Card item={items.i00009} horizontal />
-								<Card item={items.i00010} horizontal />
-								<Block flex card shadow style={styles.category}>
-									<ImageBackground
-										source={
-											Images.CherryBlossom
-										}
-										style={[
-											styles.imageBlock,
-											{
-												width:
-													width -
-													theme.SIZES.BASE * 2,
-												height: 252,
-											},
-										]}
-										imageStyle={{
+function Saved({ route, navigation }) {
+	const { allItems, userId } = route.params;
+	const [userData, setUserData] = useState();
+
+	useEffect(() => {
+		const db = getDatabase();
+		const userDataRef = dbRef(db, "users/" + userId);
+
+		const userDataOffFunction = onValue(userDataRef, (snapshot) => {
+			const newUserData = snapshot.val();
+			setUserData(newUserData);
+		});
+
+		function cleanUp() {
+			userDataOffFunction();
+		}
+
+		return cleanUp;
+	}, []);
+
+	// Page protector
+	if (!userData) {
+		return <Loading />;
+	}
+	const savedItemIds = userData.savedItems;
+
+	const renderSavedItems = () => {
+		if (savedItemIds.length === 1 && savedItemIds[0] === "default") {
+			<Text>
+				Seems like you haven't save any item yet! Click the heart icon
+				on the top right of the detail page to save your favorite items!
+			</Text>;
+		} else {
+			return savedItemIds
+				.filter(
+					(id) =>
+						id !== "default" && Object.keys(allItems).includes(id)
+				)
+				.map((itemId) => (
+					<Card
+						item={allItems[itemId]}
+						horizontal
+						key={"saved_" + itemId}
+						userData={userData}
+					/>
+				));
+		}
+	};
+	return (
+		<Block flex center>
+			<ScrollView>
+				<Block flex style={styles.group}>
+					<Block flex>
+						<Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
+							{renderSavedItems()}
+							<Block flex card shadow style={styles.category}>
+								<ImageBackground
+									source={Images.CherryBlossom}
+									style={[
+										styles.imageBlock,
+										{
 											width: width - theme.SIZES.BASE * 2,
 											height: 252,
-										}}
+										},
+									]}
+									imageStyle={{
+										width: width - theme.SIZES.BASE * 2,
+										height: 252,
+									}}
+								>
+									<TouchableOpacity
+										onPress={() =>
+											navigation.navigate("Home")
+										}
+										style={styles.categoryTitle}
 									>
-										<Block style={styles.categoryTitle}>
-											<Text
-												size={18}
-												bold
-												color={theme.COLORS.WHITE}
-											>
-												Explore More Items
-											</Text>
-										</Block>
-									</ImageBackground>
-								</Block>
+										<Text
+											size={18}
+											bold
+											color={theme.COLORS.WHITE}
+										>
+											Explore More Items
+										</Text>
+									</TouchableOpacity>
+								</ImageBackground>
 							</Block>
 						</Block>
 					</Block>
-				</ScrollView>
-			</Block>
-		);
-	}
+				</Block>
+			</ScrollView>
+		</Block>
+	);
 }
 
 const styles = StyleSheet.create({
@@ -82,7 +120,7 @@ const styles = StyleSheet.create({
 		paddingBottom: theme.SIZES.BASE,
 		paddingHorizontal: theme.SIZES.BASE * 2,
 		marginTop: 44,
-		color: argonTheme.COLORS.HEADER,
+		color: Theme.COLORS.HEADER,
 	},
 	group: {
 		paddingTop: theme.SIZES.BASE,

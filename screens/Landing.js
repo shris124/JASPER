@@ -1,4 +1,6 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { onAuthStateChanged } from "@firebase/auth";
+import { auth } from "../firebase";
 import {
 	ImageBackground,
 	Image,
@@ -6,74 +8,39 @@ import {
 	StatusBar,
 	Dimensions,
 } from "react-native";
-import { Block, Button, Text, theme } from "galio-framework";
+import { Block, Button, theme } from "galio-framework";
 
 const { height, width } = Dimensions.get("screen");
 
-import argonTheme from "../constants/Theme";
+import Theme from "../constants/Theme";
 import Images from "../constants/Images";
 
-const Landing = (props) => {
-	const { navigation } = props;
-
+const Landing = ({ route, navigation}) => {
 	return (
 		<Block flex style={styles.container}>
 			<StatusBar hidden />
 			<Block flex center>
 				<ImageBackground
-					source={Images.Onboarding}
+					source={Images.Landing}
 					style={{ height, width, zIndex: 1 }}
 				/>
 			</Block>
 			<Block center>
-				<Image source={Images.LogoOnboarding} style={styles.logo} />
+				<Image source={Images.LogoLanding} style={styles.logo} />
 			</Block>
 			<Block flex space="between" style={styles.padded}>
 				<Block flex space="around" style={{ zIndex: 2 }}>
 					<Block center>
 						<Button
 							style={styles.button}
-							color={argonTheme.COLORS.PRIMARY}
+							color={Theme.COLORS.PRIMARY}
 							onPress={() => navigation.navigate("Login")}
-							textStyle={{ color: argonTheme.COLORS.WHITE}}
+							textStyle={{ color: Theme.COLORS.WHITE }}
 						>
 							Get Started
 						</Button>
 					</Block>
-					{/* Temperary Buttons for Development, delete afterwards */}
-					{/* <Text>The following buttons are for development only</Text>
-					<Block center>
-						<Button
-							style={styles.button}
-							color={argonTheme.COLORS.SECONDARY}
-							onPress={() => navigation.navigate("Elements")}
-							textStyle={{ color: argonTheme.COLORS.WHITE}}
-						>
-							Elements Page
-						</Button>
-					</Block>
-					<Block center>
-						<Button
-							style={styles.button}
-							color={argonTheme.COLORS.SECONDARY}
-							onPress={() => navigation.navigate("Articles")}
-							textStyle={{ color: argonTheme.COLORS.WHITE}}
-						>
-							Articles Page
-						</Button>
-					</Block>
-					<Block center>
-						<Button
-							style={styles.button}
-							color={argonTheme.COLORS.SECONDARY}
-							onPress={() => navigation.navigate("Profile")}
-							textStyle={{ color: argonTheme.COLORS.WHITE}}
-						>
-							Profile Page
-						</Button>
-					</Block> */}
 				</Block>
-				
 			</Block>
 		</Block>
 	);
